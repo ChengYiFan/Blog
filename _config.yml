@@ -1,0 +1,14 @@
+baseurl: /blog
+name: "Blog of Yifan Cheng"
+description: "Web Front-End Blog by Yifan Cheng"
+
+url: "https://chengyifan.github.com/blog/"
+
+timezone: Asia/Beijing
+
+paginate: 20
+
+highlighter: pygments
+
+markdown: rdiscount
+permalink: pretty
