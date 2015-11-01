@@ -1,0 +1,47 @@
+html,body,div{
+	border: 0;margin: 0;padding: 0;vertical-align: baseline;
+}
+body{
+	background-color: #f1f1f1;
+}
+body,input,textarea{
+	color:#666;
+	font-size: 12px;
+	line-height: 18px;
+}
+h1,h2,h3,h4,h5,h6{
+	clear: both;
+	font-weight: normal;
+}
+.boundary{
+	margin: 0 auto;
+	width:950px;
+}
+#wrapper{
+	background: #fff;
+	margin-top: 20px;
+	padding: 0 20px;
+}
+
+#header{
+	padding:30px 0 0 0;
+}
+.branding h1{
+	float: left;
+	font-size: 30px;
+	line-height: 36px;
+	margin: 0 0 18px 0;
+	width: 700px;
+}
+#main{
+
+}
+#footer{
+	margin-bottom: 20px;
+	
+
+}
+#footer{
+	clear: both;
+	width:100%;
+}
