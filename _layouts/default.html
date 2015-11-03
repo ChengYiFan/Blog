@@ -3,10 +3,14 @@
 　　<head>
 　　　　<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 　　　　<title>{{ page.title }}</title>
+	   <link rel="stylesheet" href="/css/common.css" type="text/css" />
 　　</head>
 　　<body>
-
-　　　　{{ content }}
+    <div class="wrapper">
+    	{% include header.html %}
+		{{ content }}
+		{% include footer.html %}
+    </div>
 
 　　</body>
 　　</html>
