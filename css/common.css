@@ -18,3 +18,24 @@ button,input,optgroup,select,textarea {
   font: inherit; /* 2 */
   margin: 0; /* 3 */
 }
+body{
+	background-color: #f1f1f1;
+}
+a:visited{
+	color: #743399;
+}
+a:link{
+	color: #0066cc;
+}
+.boundary{
+	margin: 0 auto;
+	width:950px;
+}
+.wrapper{
+	background-color: #fff;
+	margin-top: 20px;
+	padding: 0 20px;
+}
+.header{
+	padding:30px 0 0 0;
+}
