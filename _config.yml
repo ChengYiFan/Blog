@@ -1,9 +1,8 @@
-baseurl: /jekyll_demo
-baseurl: /jekyll_demo
-name: "Blog of ChengYiFan"
+baseurl: /blog
+name: "Blog of Yifan Cheng"
 description: "Web Front-End Blog by ChengYiFan"
 
-url: "https://chengyifan.github.com/jekyll_demo/"
+url: "https://chengyifan.github.com/blog"
 
 timezone: Asia/Beijing
 
