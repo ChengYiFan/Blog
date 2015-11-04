@@ -18,8 +18,10 @@ button,input,optgroup,select,textarea {
   font: inherit; /* 2 */
   margin: 0; /* 3 */
 }
-body{
-	background-color: #f1f1f1;
+body,input,textarea{
+	color:#666;
+	font-size: 12px;
+	line-height: 18px;
 }
 a:visited{
 	color: #743399;
@@ -77,20 +79,23 @@ a:link{
 	position: relative;
 }
 .menu a{
+	color:;
 	display: block;
 	line-height: 38px;
 	padding: 0 10px;
 }
 
-
+.main{
+	clear: both;
+	overflow: hidden;
+	padding: 40px 0 0 0;
+}
 
 
 
 
 .footer{
 	margin-bottom: 20px;
-	
-
 }
 .footer{
 	clear: both;
