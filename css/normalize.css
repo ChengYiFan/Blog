@@ -1,0 +1,91 @@
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%
+}
+
+body{
+    margin: 0;
+}
+
+a {
+    background-color: transparent;
+}
+
+a:active, a:hover {
+    outline: 0
+}
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0
+}
+img {
+    border: 0
+}
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0
+}
+
+button {
+    overflow: visible
+}
+input {
+    line-height: normal
+}
+
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0
+}
+* {
+    box-sizing: border-box
+}
+
+input, select, textarea, button {
+    font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body {
+    font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+    background-color: #fff;
+}
+
+a {
+    color: #4078c0;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin:15px 0;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 21px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+h6 {
+    font-size: 11px;
+}
