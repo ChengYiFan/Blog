@@ -1,8 +1,8 @@
 baseurl: /blog
-name: "Blog of Yifan Cheng"
-description: "Web Front-End Blog by Yifan Cheng"
+name: "CC空间"
+description: "一个PD&FE的成长空间"
 
-url: "https://chengyifan.github.com/blog/"
+url: "https://chengyifan.github.com/blog"
 
 timezone: Asia/Beijing
 
