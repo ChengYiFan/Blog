@@ -8,17 +8,77 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 	<title>首页</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	
-	<header>
+	<link href="css/main.css" rel="stylesheet">
+	<header class="header clearfix">
 		<div class="container">
+			<div class="header-login">
+				<a href="/user/login">登录</a>
+			</div>
+			<div class="header-describe">一个RD&FE的成长空间</div>
 			<div class="logo"><h2>CC空间</h2></div>
-			<div class="describe">一个RD&FE的成长空间</div>
 		</div>
 	</header>
-	<div class="container">
-  	
+	<div class="container clearfix">
+  		<div class="main">
+  			<div class="article-list">
+  				<article class="article">
+  					<header class="article-header clearfix">
+  					   <h3 class="article-header-title"><a href="">multer中间件的安全问题</a></h3>
+  					   <div class="article-meta">
+							<a href="/article/list/4/frontend">Node.js</a>
+  					   		|  2015-05-15
+  					   </div>
+  					 </header>
+  					 <section class="article-section">
+  					 	<h4></h4>
+  					 	<p>
+  					 		昨天备份本博客的时候发现，上传目录下多了几个奇怪的.asp和.php文件。这些文件并非我自己上传的，很可能是通过某个漏洞传到了服务器上。这会有什么危害呢？下面简单介绍一下。</p>
+  					 	<p>
+  					 		假设某人把一个功能为删除站点下所有文件的evil.php通过漏洞传到了http://abc.com/upload/下，然后访问http://abc.com/upload/evil.php，那么：
+  					 	</p>
+  					 	<ul>
+  					 		<li>如果该站点不支持php脚本，是没什么危害的；</li>
+  					 		<li>如果该站点支持php脚本，它的全部文件就会被删除。</li>
+  					 	</ul>
+  					 	<p>
+  					 		这里有两个关键点，一是<strong>主动访问</strong>该文件才会触发脚本执行，二是<strong>服务器支持</strong>该类型脚本才能执行。而本博客刚好不具备这两个条件（后面再详细说明），所以没有造成任何损失。即便如此，这漏洞还是要修复的，不然被无休止地上传文件迟早会占满硬盘空间。
+  					 	</p>
+  					 	<p>
+  					 		本博客基于express框架开发，上传功能是通过<a target="_blank" href="https://www.npmjs.com/package/multer">multer中间件</a>实现的，且只有管理后台存在文件上传的功能。因为后台页面、接口都设有权限验证，是不可能被绕过的。最后发现问题出在multer的调用上，而这问题又要归咎于官方文档的错误引导了：
+  					 	</p>
+  					 	<pre>
+  					 		<code class="language-javascript hljs">app.use(multer({
+						       dest: <span class="hljs-string">'./uploads/'</span>,
+						       rename: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fieldname, filename</span>) </span>{
+						        		<span class="hljs-keyword">return</span> filename.replace(<span class="hljs-regexp">/\W+/g</span>, <span class="hljs-string">'-'</span>).toLowerCase() + <span class="hljs-built_in">Date</span>.now()
+						    			}
+							}))</code>
+						</pre>
+  					 </section>
+  					 <footer class="article-footer">
+  					 	
+  					 </footer>
+  				</article>
+
+  				<nav id="article-paginate">
+  					<ol>
+  						<li></li>
+  					</ol>
+
+  				</nav>
+  			</div>
+  		</div>
+  		<aside class="sidebar">
+  			
+
+
+
+
+  		</aside>
 	</div>
-    
+    <footer class="footer">
+    	
+    </footer>
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
