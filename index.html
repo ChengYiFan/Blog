@@ -46,13 +46,12 @@
   					 	<p>
   					 		本博客基于express框架开发，上传功能是通过<a target="_blank" href="https://www.npmjs.com/package/multer">multer中间件</a>实现的，且只有管理后台存在文件上传的功能。因为后台页面、接口都设有权限验证，是不可能被绕过的。最后发现问题出在multer的调用上，而这问题又要归咎于官方文档的错误引导了：
   					 	</p>
-  					 	<pre>
-  					 		<code class="language-javascript hljs">app.use(multer({
-						       dest: <span class="hljs-string">'./uploads/'</span>,
-						       rename: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fieldname, filename</span>) </span>{
-						        		<span class="hljs-keyword">return</span> filename.replace(<span class="hljs-regexp">/\W+/g</span>, <span class="hljs-string">'-'</span>).toLowerCase() + <span class="hljs-built_in">Date</span>.now()
-						    			}
-							}))</code>
+  					 	<pre><code class="language-javascript hljs">app.use(multer({
+	dest: <span class="hljs-string">'./uploads/'</span>,
+	rename: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fieldname, filename</span>) </span>{
+	<span class="hljs-keyword">return</span> filename.replace(<span class="hljs-regexp">/\W+/g</span>, <span class="hljs-string">'-'</span>).toLowerCase() + <span class="hljs-built_in">Date</span>.now()
+	}
+}))</code>
 						</pre>
   					 </section>
   					 <footer class="article-footer">
@@ -61,23 +60,51 @@
   				</article>
 
   				<nav id="article-paginate">
-  					<ol>
-  						<li></li>
+  					<ol class="pager">
+  						<li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
   					</ol>
 
   				</nav>
   			</div>
   		</div>
   		<aside class="sidebar">
-  			
-
+  			<div class="sidebar-module">
+          <h4>Archives</h4> 
+          <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>  
+        </div>
+        <div class="sidebar-module">
+          <h4>Kind</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">Node.js</a></li>
+            <li><a href="#">javascript</a></li>
+            <li><a href="#">css</a></li>
+            <li><a href="#">html5</a></li>
+          </ol>
+        </div>
 
 
 
   		</aside>
 	</div>
     <footer class="footer">
-    	
+    	<p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
     </footer>
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.min.js"></script>
