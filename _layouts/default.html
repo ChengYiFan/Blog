@@ -1,63 +1,55 @@
 <!DOCTYPE html>
-　　 <html lang="en">
-　　 <head>
-　　   <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-　　   <title>{{ site.name }}</title>
-	  <link rel="stylesheet" href="{{site.url}}/css/bootstrap.min.css">
-      <link rel="stylesheet" href="{{site.url}}/css/blog.css">
-　　 </head>
-　　 <body>
-        {% include header.html %}
-    	<div class="main">
-    		<div class="alpha">
-    			{{ content }}
-    		</div>
-    		<div class="beta">
-    			
-    		</div>	
-    	</div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-9 left">
-                    <div class="article-list">
-                        <div class="article-list-item">
-                            {{content}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-3 right">
-                    <div class="sidebar-module">
-                        <h4>最新文章</h4>
-                        <ol class="list-unstyled">
-                            <li><a href="">GitHubGitHubGitHubGitHub</a></li>
-                            <li><a href="">weiboGitHubGitHubGitHub</a></li>
-                            <li><a href="">weixinGitHubGitHubGitHub</a></li>
-                        </ol>
-                    </div>
-                    <div class="sidebar-module sidebar-module-inset">
-                        <h4>关键字</h4>
-                        <div class="tag-list">
-                            <a href="">JavaScript</a>
-                            <a href="">Node.js</a>
-                            <a href="">CSS</a>
-                            <a href="">HTML5</a>
-                            <a href="">jQuery</a>
-                        </div>
-                    </div>
-                    <div class="sidebar-module">
-                        <h4>文章归档</h4>
-                        <ol class="list-unstyled">
-                            <li><span class="pull-right">(10)</span><a href="">2016年</a></li>
-                            <li><span class="pull-right">(10)</span><a href="">2015年</a></li>
-                            <li><span class="pull-right">(10)</span><a href="">2014年</a></li>
-                            <li><span class="pull-right">(10)</span><a href="">2013年</a></li>
-                        </ol>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    　　   <title>{{ site.name }}</title>
+    <link rel="stylesheet" href="{{site.url}}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{site.url}}css/blog.css">
+  </head>
+  <body>
+    {% include header.html %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9 left">
+                <div class="article-list">
+                    <div class="article-list-item">
+                        {{content}}
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-3 right">
+                <div class="sidebar-module">
+                    <h4>最新文章</h4>
+                    <ol class="list-unstyled">
+                        <li><a href="">GitHubGitHubGitHubGitHub</a></li>
+                        <li><a href="">weiboGitHubGitHubGitHub</a></li>
+                        <li><a href="">weixinGitHubGitHubGitHub</a></li>
+                    </ol>
+                </div>
+                <div class="sidebar-module sidebar-module-inset">
+                    <h4>关键字</h4>
+                    <div class="tag-list">
+                        <a href="">JavaScript</a>
+                        <a href="">Node.js</a>
+                        <a href="">CSS</a>
+                        <a href="">HTML5</a>
+                        <a href="">jQuery</a>
+                    </div>
+                </div>
+                <div class="sidebar-module">
+                    <h4>文章归档</h4>
+                    <ol class="list-unstyled">
+                        <li><span class="pull-right">(10)</span><a href="">2016年</a></li>
+                        <li><span class="pull-right">(10)</span><a href="">2015年</a></li>
+                        <li><span class="pull-right">(10)</span><a href="">2014年</a></li>
+                        <li><span class="pull-right">(10)</span><a href="">2013年</a></li>
+                    </ol>
+                </div>
+            </div>
         </div>
-	    {% include footer.html %}
-　　</body>
-　　</html>
+    </div>
+    {% include footer.html %}
+   </body>
+</html>
