@@ -6,13 +6,12 @@ title: Cynthia's Blog
 <div class="article-list-item">
 	<span class="date" role="update"><em>11</em>月<br/>2016年</span>
 	<h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
-	<p class="author">作者：<em class="color-pink">Cynthia</em></p>
+	<p class="author">作者：<em class="color-pink">{{page.author}}</em></p>
 	<article>
-	  <p>做了个基于HTML5 drag/drop模块拖动插入排序删除完整demo，非常适合作为学习案例，以及在此基础上定制属于自己的模块拖拽功能。</p>
-	  <p>希望本文的内容可以帮助一些小伙伴节约开发时间和成本。</p>
+	  {{ post.excerpt }}
 	</article>
 	<div class="more">
-	  <a href="" class="get-more">阅读全文</a>
+	  <a href="{{site.baseurl}}{{post.url}}" class="get-more">阅读全文</a>
 	</div>
 	<div class="tag-list">
 	  <a href="">CSS</a>
