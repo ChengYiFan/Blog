@@ -1,12 +1,12 @@
 baseurl: /blog
-name: "CC空间"
+name: "Cynthia's Blog"
 description: "一个PD&FE的成长空间"
 
-url: "https://chengyifan.github.com/blog/"
+url: "https://chengyifan.github.io/blog/"
 
 timezone: Asia/Beijing
 
-paginate: 20
+paginate: 1
 
 highlighter: pygments
 

@@ -1,0 +1,31 @@
+---
+layout: default
+title: 浏览器版本重新判断
+categories: skill
+tags: JavaScript
+excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的判断浏览器版本的方法，附上代码。
+---
+<h3>{{page.title}}</h3>
+<p class="author">
+    作者：<em class="color-pink">Cynthia</em> 
+    <span class="normal-date"> · {{ page.date | date_to_string }}</span>
+</p>
+<article>
+    <p>在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
+    <pre>
+    <code>
+        //return eg:6.0、7.0、8.0、9.0、10.0
+        function getIEVer(){
+            var agent = navigator.userAgent.toLowerCase();
+            if(agent.indexOf("msie") > -1)
+                return agent.match(/msie([\d.]+)/)[1];
+        }
+    </code>
+    </pre>
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="">{{tag}}</a>
+	{% endfor%}
+</div>
