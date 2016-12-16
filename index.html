@@ -1,117 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-	<title>首页</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<header class="header clearfix">
-		<div class="container">
-			<div class="header-login">
-				<a href="/user/login">登录</a>
-			</div>
-			<div class="header-describe">一个RD&FE的成长空间</div>
-			<div class="logo"><h2>CC空间</h2></div>
-		</div>
-	</header>
-	<div class="container clearfix">
-  		<div class="main">
-  			<div class="article-list">
-  				<article class="article">
-  					<header class="article-header clearfix">
-  					   <h3 class="article-header-title"><a href="">multer中间件的安全问题</a></h3>
-  					   <div class="article-meta">
-							     
-  					   </div>
-               
-  					 </header>
-             <div>
-                  <a href="/article/list/4/frontend"><i class="glyphicon glyphicon-tag"></i> Node.js</a> 
-                  <span class="pull-right"><i class="glyphicon glyphicon-time"></i> 2016-06-20</span>
-             </div>
-  					 <section class="article-section">
-  					 	<h4></h4>
-  					 	<p>
-  					 		昨天备份本博客的时候发现，上传目录下多了几个奇怪的.asp和.php文件。这些文件并非我自己上传的，很可能是通过某个漏洞传到了服务器上。这会有什么危害呢？下面简单介绍一下。</p>
-  					 	<p>
-  					 		假设某人把一个功能为删除站点下所有文件的evil.php通过漏洞传到了http://abc.com/upload/下，然后访问http://abc.com/upload/evil.php，那么：
-  					 	</p>
-  					 	<ul>
-  					 		<li>如果该站点不支持php脚本，是没什么危害的；</li>
-  					 		<li>如果该站点支持php脚本，它的全部文件就会被删除。</li>
-  					 	</ul>
-  					 	<p>
-  					 		这里有两个关键点，一是<strong>主动访问</strong>该文件才会触发脚本执行，二是<strong>服务器支持</strong>该类型脚本才能执行。而本博客刚好不具备这两个条件（后面再详细说明），所以没有造成任何损失。即便如此，这漏洞还是要修复的，不然被无休止地上传文件迟早会占满硬盘空间。
-  					 	</p>
-  					 	<p>
-  					 		本博客基于express框架开发，上传功能是通过<a target="_blank" href="https://www.npmjs.com/package/multer">multer中间件</a>实现的，且只有管理后台存在文件上传的功能。因为后台页面、接口都设有权限验证，是不可能被绕过的。最后发现问题出在multer的调用上，而这问题又要归咎于官方文档的错误引导了：
-  					 	</p>
-  					 	<pre><code class="language-javascript hljs">app.use(multer({
-	dest: <span class="hljs-string">'./uploads/'</span>,
-	rename: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fieldname, filename</span>) </span>{
-	<span class="hljs-keyword">return</span> filename.replace(<span class="hljs-regexp">/\W+/g</span>, <span class="hljs-string">'-'</span>).toLowerCase() + <span class="hljs-built_in">Date</span>.now()
-	}
-}))</code>
-						</pre>
-  					 </section>
-  					 <footer class="article-footer">
-  					 	
-  					 </footer>
-  				</article>
-
-  				<nav id="article-paginate">
-  					<ol class="pager">
-  						<li><a href="#">上一页</a></li>
-              <li><a href="#">下一页</a></li>
-  					</ol>
-
-  				</nav>
-  			</div>
-  		</div>
-  		<aside class="sidebar">
-  			<div class="sidebar-module">
-          <h4>Archives</h4> 
-          <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
-            </ol>  
-        </div>
-  		</aside>
-      <aside class="sidebar">
-        <div class="sidebar-module">
-          <h4>Kind</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">Node.js</a></li>
-            <li><a href="#">javascript</a></li>
-            <li><a href="#">css</a></li>
-            <li><a href="#">html5</a></li>
-          </ol>
-        </div>
-      </aside>
-	</div>
-    <footer class="footer">
-    	
-        <a href="#">Back to top</a>
-      </p>
-    </footer>
-    <script src="js/jquery-2.1.4.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cynthia's blog</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/blog.css">
 </head>
 <body>
-	
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <span class="navbar-brand">CC空间</span>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">一个RD&FE的成长空间</a></li>
+        </ul>
+      </div>
+    </div>  
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-9 left">
+        <div class="article-list">
+          <div class="article-list-item">
+            <span class="date" role="update"><em>11</em>月<br/>2016年</span>
+            <h3><a href="">基于HTML5 drag/drop模块拖动插入排序删除完整实例</a></h3>
+            <p class="author">作者：<em class="color-pink">Cynthia</em></p>
+            <article>
+              <p>做了个基于HTML5 drag/drop模块拖动插入排序删除完整demo，非常适合作为学习案例，以及在此基础上定制属于自己的模块拖拽功能。</p>
+              <p>希望本文的内容可以帮助一些小伙伴节约开发时间和成本。</p>
+            </article>
+            <div class="more">
+              <a href="" class="get-more">阅读全文</a>
+            </div>
+            <div class="tag-list">
+              <a href="">CSS</a>
+              <a href="">SEO</a>
+              <a href="">移动开发</a>
+            </div>
+          </div>
+        </div>
+        <nav id="article-paginate">
+          <ol class="pager">
+            <li><a href="#">上一页</a></li>
+            <li><a href="#">下一页</a></li>
+          </ol>
+        </nav>
+      </div>
+      <div class="col-xs-12 col-sm-3 right">
+        <div class="sidebar-module">
+          <h4>最新文章</h4>
+          <ol class="list-unstyled">
+            <li><a href="">GitHubGitHubGitHubGitHub</a></li>
+            <li><a href="">weiboGitHubGitHubGitHub</a></li>
+            <li><a href="">weixinGitHubGitHubGitHub</a></li>
+          </ol>
+        </div>
+        
+        <div class="sidebar-module sidebar-module-inset">
+          <h4>关键字</h4>
+          <div class="tag-list">
+            <a href="">JavaScript</a>
+            <a href="">Node.js</a>
+            <a href="">CSS</a>
+            <a href="">HTML5</a>
+            <a href="">jQuery</a>
+          </div>
+        </div>
+        
+        <div class="sidebar-module">
+          <h4>文章归档</h4>
+          <ol class="list-unstyled">
+            <li><span class="pull-right">(10)</span><a href="">2016年</a></li>
+            <li><span class="pull-right">(10)</span><a href="">2015年</a></li>
+            <li><span class="pull-right">(10)</span><a href="">2014年</a></li>
+            <li><span class="pull-right">(10)</span><a href="">2013年</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="copyright">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-12">
+                  <span>Copyright © 2013-2016 Cynthia Cheng</span>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script src="js/jquery-2.1.4.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
