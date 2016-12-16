@@ -1,8 +1,8 @@
 ---
 layout: default
 title: 雅虎优化前端性能的34条建议
-tags:SEO
-excerpt:这篇文章详细介绍了雅虎优化前端性能的34条建议。前端是涉及的内容是庞大的，恰当的优化不仅能够改善站点的用户体验并且能够节省相当的资源利用。
+tags: SEO
+excerpt: 这篇文章详细介绍了雅虎优化前端性能的34条建议。前端是涉及的内容是庞大的，恰当的优化不仅能够改善站点的用户体验并且能够节省相当的资源利用。
 ---
 <h3>{{page.title}}</h3>
 <p class="author">
@@ -30,5 +30,7 @@ excerpt:这篇文章详细介绍了雅虎优化前端性能的34条建议。前�
 </article>
 <div class="line"></div>
 <div class="tag-list">
-    <a href="">{{page.tags}}</a>
+	{% for tag in page.tags %}
+    <a href="">{{tag}}</a>
+	{% endfor%}
 </div>
