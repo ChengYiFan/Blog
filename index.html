@@ -1,98 +1,23 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cynthia's blog</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/blog.css">
-</head>
-<body>
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="http://chengyifan.github.io/blog/">CC空间</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">一个RD&FE的成长空间</a></li>
-        </ul>
-      </div>
-    </div>  
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-9 left">
-        <div class="article-list">
-          <div class="article-list-item">
-            <span class="date" role="update"><em>11</em>月<br/>2016年</span>
-            <h3><a href="/article/list/4/frontend">基于HTML5 drag/drop模块拖动插入排序删除完整实例</a></h3>
-            <p class="author">作者：<em class="color-pink">Cynthia</em></p>
-            <article>
-              <p>做了个基于HTML5 drag/drop模块拖动插入排序删除完整demo，非常适合作为学习案例，以及在此基础上定制属于自己的模块拖拽功能。</p>
-              <p>希望本文的内容可以帮助一些小伙伴节约开发时间和成本。</p>
-            </article>
-            <div class="more">
-              <a href="" class="get-more">阅读全文</a>
-            </div>
-            <div class="tag-list">
-              <a href="">CSS</a>
-              <a href="">SEO</a>
-              <a href="">移动开发</a>
-            </div>
-          </div>
-        </div>
-        <nav id="article-paginate">
-          <ol class="pager">
-            <li><a href="#">上一页</a></li>
-            <li><a href="#">下一页</a></li>
-          </ol>
-        </nav>
-      </div>
-      <div class="col-xs-12 col-sm-3 right">
-        <div class="sidebar-module">
-          <h4>最新文章</h4>
-          <ol class="list-unstyled">
-            <li><a href="">GitHubGitHubGitHubGitHub</a></li>
-            <li><a href="">weiboGitHubGitHubGitHub</a></li>
-            <li><a href="">weixinGitHubGitHubGitHub</a></li>
-          </ol>
-        </div>
-        
-        <div class="sidebar-module sidebar-module-inset">
-          <h4>关键字</h4>
-          <div class="tag-list">
-            <a href="">JavaScript</a>
-            <a href="">Node.js</a>
-            <a href="">CSS</a>
-            <a href="">HTML5</a>
-            <a href="">jQuery</a>
-          </div>
-        </div>
-        
-        <div class="sidebar-module">
-          <h4>文章归档</h4>
-          <ol class="list-unstyled">
-            <li><span class="pull-right">(10)</span><a href="">2016年</a></li>
-            <li><span class="pull-right">(10)</span><a href="">2015年</a></li>
-            <li><span class="pull-right">(10)</span><a href="">2014年</a></li>
-            <li><span class="pull-right">(10)</span><a href="">2013年</a></li>
-          </ol>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="copyright">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-12">
-                  <span>Copyright © 2013-2016 Cynthia Cheng</span>
-              </div>
-          </div>
-      </div>
-  </div>
-  <script src="js/jquery-2.1.4.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+---
+layout: index
+title: Cynthia's Blog
+---
+{% for post in site.posts %}
+<div class="article-list-item">
+	<span class="date" role="update"><em>11</em>月<br/>2016年</span>
+	<h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
+	<p class="author">作者：<em class="color-pink">Cynthia</em></p>
+	<article>
+	  <p>做了个基于HTML5 drag/drop模块拖动插入排序删除完整demo，非常适合作为学习案例，以及在此基础上定制属于自己的模块拖拽功能。</p>
+	  <p>希望本文的内容可以帮助一些小伙伴节约开发时间和成本。</p>
+	</article>
+	<div class="more">
+	  <a href="" class="get-more">阅读全文</a>
+	</div>
+	<div class="tag-list">
+	  <a href="">CSS</a>
+	  <a href="">SEO</a>
+	  <a href="">移动开发</a>
+	</div>
+</div>
+{% endfor%}
