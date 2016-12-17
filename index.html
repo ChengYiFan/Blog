@@ -26,7 +26,7 @@ title: Cynthia's Blog
 <nav id="article-paginate">
   <ol class="pager">
   {% if paginator.previous_page %}
-    <li><a href="{{site.paginate_path}}{{ paginator.previous_page }}" class="previous">上一页</a></li>
+    <li><a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" class="previous">上一页</a></li>
   {% else %}
     <li><a class="previous" disabled="disabled">上一页</a></li>
   {% endif %}
