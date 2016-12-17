@@ -5,7 +5,7 @@ title: Cynthia's Blog
 <div class="article-list">
 	{% for post in paginator.posts %}
 	<div class="article-list-item">
-		<span class="date" role="update"><em>11</em>月<br/>2016年</span>
+		<span class="date" role="update"><em>{{post.date | date: "%m"}}</em>月<br/>{{post.date | date: "%Y年"}}</span>
 		<h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
 		<p class="author">作者：<em class="color-pink">Cynthia</em></p>
 		<article>
