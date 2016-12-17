@@ -8,7 +8,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
 <h3>{{page.title}}</h3>
 <p class="author">
     作者：<em class="color-pink">Cynthia</em> 
-    <span class="normal-date"> · {{ page.date | date_to_xmlschema }}</span>
+    <span class="normal-date"> · {{ page.date | date_to_xmlschema%y-%m-%d }}</span>
 </p>
 <article>
     <p>在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
