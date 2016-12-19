@@ -10,11 +10,9 @@
 <div class="sidebar-module sidebar-module-inset">
   <h4>关键字</h4>
   <div class="tag-list">
-    <a href="">JavaScript</a>
-    <a href="">Node.js</a>
-    <a href="">CSS</a>
-    <a href="">HTML5</a>
-    <a href="">jQuery</a>
+    {% for tag in site.tags %}
+    <a href="">{{ tag }}</a>
+    {% endfor %}
   </div>
 </div>
 
