@@ -20,7 +20,7 @@
   <h4>文章归档</h4>
   <ol class="list-unstyled">
     {% for post in site.posts group:post.date | date: "%Y" %}
-    <li><span class="pull-right">{{post.size}}</span><a href="">{{post.date | date: "%Y年"}}</a></li>
+    <li><span class="pull-right">{{post | last | size}}</span><a href="">{{post.date | date: "%Y年"}}</a></li>
     {% endfor %}
   </ol>
 </div>
