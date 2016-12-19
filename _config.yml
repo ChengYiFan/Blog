@@ -9,7 +9,6 @@ timezone: Asia/Beijing
 paginate: 1
 paginate_path: "blog/page:num"
 
-highlighter: pygments
 
 markdown: rdiscount
 permalink: pretty
