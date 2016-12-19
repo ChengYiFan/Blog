@@ -1,0 +1,30 @@
+
+<div class="sidebar-module">
+  <h4>最新文章</h4>
+  <ol class="list-unstyled">
+    {% for post in site.posts %}
+    <li><a href="{{site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ol>
+</div>
+<div class="sidebar-module sidebar-module-inset">
+  <h4>关键字</h4>
+  <div class="tag-list">
+    <a href="">JavaScript</a>
+    <a href="">Node.js</a>
+    <a href="">CSS</a>
+    <a href="">HTML5</a>
+    <a href="">jQuery</a>
+  </div>
+</div>
+
+<div class="sidebar-module">
+  <h4>文章归档</h4>
+  <ol class="list-unstyled">
+    <li><span class="pull-right">(10)</span><a href="">2016年</a></li>
+    <li><span class="pull-right">(10)</span><a href="">2015年</a></li>
+    <li><span class="pull-right">(10)</span><a href="">2014年</a></li>
+    <li><span class="pull-right">(10)</span><a href="">2013年</a></li>
+  </ol>
+</div>
+    
