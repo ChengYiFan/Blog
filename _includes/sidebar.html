@@ -2,7 +2,7 @@
 <div class="sidebar-module">
   <h4>最新文章</h4>
   <ol class="list-unstyled">
-    {% for post in site.posts %}
+    {% for post in site.posts limit:1 %}
     <li><a href="{{site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ol>
@@ -11,7 +11,7 @@
   <h4>关键字</h4>
   <div class="tag-list">
     {% for tag in site.tags %}
-        <a href="{{ site.baseurl}}/tag/{{ tag.first }}.html">{{tag[0]}}</a>
+        <a href="{{ site.baseurl}}/show_by_tag.html?tag={{tag[0]}}">{{tag[0]}}</a>
     {% endfor%}
   </div>
 </div>
