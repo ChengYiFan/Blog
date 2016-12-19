@@ -47,7 +47,7 @@ layout: index
         return query_string;
     }
     
-	window.jQueryCallBack = function() {
+	window.onload = function() {
         var query = queryString();
         if (query.tag !== undefined) {
             var tag = decodeURI(query.tag);
