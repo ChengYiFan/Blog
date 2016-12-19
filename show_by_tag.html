@@ -3,7 +3,7 @@ layout: index
 ---
 <div class="article-list">
 	{% for post in site.posts %}
-	<div class="article-list-item{% for tag in post.tags %} tag-{{ tag }}{% endfor%}">
+	<div class="article-list-item{% for tag in post.tags %} tags-{{ tag }}{% endfor%}">
 		<span class="date" role="update"><em>{{post.date | date: "%m"}}</em>月<br/>{{post.date | date: "%Y年"}}</span>
 		<h3><a href="{{site.baseurl}}{{post.url}}">{{post.title}}</a></h3>
 		<p class="author">作者：<em class="color-pink">Cynthia</em></p>
@@ -51,7 +51,7 @@ layout: index
         var query = queryString();
         if (query.tag !== undefined) {
             var tag = decodeURI(query.tag);
-            $('.article-list-item').not('.tag-' + tag).hide();
+            $('.article-list-item').not('.tags-' + tag).hide();
         }
     };
    
