@@ -1,6 +1,5 @@
 ---
 layout: index
-title: Cynthia's Blog
 ---
 <div class="article-list">
 	{% for post in paginator.posts %}
@@ -16,7 +15,7 @@ title: Cynthia's Blog
 		</div>
 		<div class="tag-list">
 			{% for tag in post.tags %}
-		    <a href="">{{tag}}</a>
+		    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
 			{% endfor%}
 		</div>
 	</div>

@@ -32,6 +32,6 @@ excerpt: 前端是涉及的内容是庞大的，恰当的优化不仅能够改�
 <div class="line"></div>
 <div class="tag-list">
 	{% for tag in page.tags %}
-    <a href="">{{tag}}</a>
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
 	{% endfor%}
 </div>

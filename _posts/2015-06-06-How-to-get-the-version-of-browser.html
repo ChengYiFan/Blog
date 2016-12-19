@@ -26,6 +26,6 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
 <div class="line"></div>
 <div class="tag-list">
 	{% for tag in page.tags %}
-    <a href="">{{tag}}</a>
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
 	{% endfor%}
 </div>
