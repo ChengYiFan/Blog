@@ -8,12 +8,11 @@
         <div class="sidebar-module">
           <h4>最新文章</h4>
           <ol class="list-unstyled">
-            <li><a href="">GitHubGitHubGitHubGitHub</a></li>
-            <li><a href="">weiboGitHubGitHubGitHub</a></li>
-            <li><a href="">weixinGitHubGitHubGitHub</a></li>
+            {% for post in site.posts %}
+            <li><a href="{{ post.ur l}}">{{ post.title }}</a></li>
+            {% endfor %}
           </ol>
         </div>
-        
         <div class="sidebar-module sidebar-module-inset">
           <h4>关键字</h4>
           <div class="tag-list">
