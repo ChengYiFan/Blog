@@ -53,6 +53,7 @@ layout: index
 	        var query = queryString();
 	        if (query.tag !== undefined) {
 	            var tag = decodeURI(query.tag);
+	            console.log(tag);
 	            // $('.pageTitle').text('Posts tagged with ' + tag);
 	            // $('h1').hide();
 	            $('.article-list-item').not('.tag-' + tag).hide();
