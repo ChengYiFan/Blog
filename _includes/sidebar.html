@@ -2,7 +2,7 @@
 <div class="sidebar-module">
   <h4>最新文章</h4>
   <ol class="list-unstyled">
-    {% for post in site.posts limit:1 %}
+    {% for post in site.posts limit:6 %}
     <li><a href="{{site.baseurl}}{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ol>
