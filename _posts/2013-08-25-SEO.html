@@ -220,7 +220,7 @@ excerpt: 前端是涉及的内容是庞大的，恰当的优化不仅能够改�
     <h4>29、优化图像</h4>
     <p>设计人员完成对页面的设计之后，不要急于将它们上传到服务器，这里还需要做几件事：</p>
     <ul><li>你可以检查一下你的GIF图片中图像颜色的数量是否和调色板规格一致。使用imagemagick中下面的命令很容易检查：identify-verbose image.gif如果你发现图片中只用到了4种颜色，而在调色板中显示的256的颜色槽，那么这张图片就还有压缩的空间。</li><li>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。由于浏览器支持有限，设计者们往往不太乐意使用PNG格式的图片，不过这都是过去的事情了。现在只有一个问题就是在真彩PNG格式中的alpha通道半透明问题，不过同样的，GIF也不是真彩格式也不支持半透明。因此GIF能做到的，PNG（PNG8）同样也能做到（除了动画）。下面这条简单的命令可以安全的把GIF格式转换为PNG格式：<code>convert image.gif image.png</code></li></ul>
-    <p>”我们要说的是：给PNG一个施展身手的机会吧！“在所有的PNG图片上运行pngcrush（或者其他PNG优化工具）。例如：</p>
+    <p>我们要说的是：给PNG一个施展身手的机会吧！在所有的PNG图片上运行pngcrush（或者其他PNG优化工具）。例如：</p>
     <p style="padding-left: 30px;" ><code>pngcrush image.png -rem alla -reduce -brute result.png</code></p>
     <p>在所有的JPEG图片上运行jpegtran。这个工具可以对图片中出现的锯齿做无损操作，同时它还可以用于优化和清除图片中的注释以及其他无用信息（如EXIF信息）：</p>
     <p style="padding-left: 30px;"><code>jpegtran -copy none-optimize -perfect src.jpg dest.jpg</code></p>
