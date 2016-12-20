@@ -1,0 +1,21 @@
+---
+layout: default
+title: 如何提升前端开发的技能
+category: skill
+tags: JavaScript
+excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的判断浏览器版本的方法，附上代码。
+---
+<h3>{{page.title}}</h3>
+<p class="author">
+    作者：<em class="color-pink">Cynthia</em> 
+    <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
+</p>
+<article>
+    <p>在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+	{% endfor%}
+</div>
