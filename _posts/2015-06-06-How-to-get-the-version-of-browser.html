@@ -14,12 +14,12 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     <p>在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
     <pre>
     <code>
-        //return eg:6.0、7.0、8.0、9.0、10.0
-        function getIEVer(){
-            var agent = navigator.userAgent.toLowerCase();
-            if(agent.indexOf("msie") > -1)
-                return agent.match(/msie([\d.]+)/)[1];
-        }
+    //return eg:6.0、7.0、8.0、9.0、10.0
+    function getIEVer(){
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf("msie") > -1)
+            return agent.match(/msie([\d.]+)/)[1];
+    }
     </code>
     </pre>
 </article>

@@ -6,7 +6,7 @@ url: "https://chengyifan.github.io/blog/"
 
 timezone: Asia/Beijing
 
-paginate: 1
+paginate: 5
 paginate_path: "blog/page:num"
 
 
