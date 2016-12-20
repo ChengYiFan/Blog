@@ -139,7 +139,7 @@ excerpt: 前端是涉及的内容是庞大的，恰当的优化不仅能够改�
     GET/i/yahoo.gif HTTP/1.1
     Host: us.yimg.com
     If-Modified-Since: Tue, 12 Dec 2006 03:03:59 GMT
-    If-None-Match: "10c24bc-4ab-457e1c1f""
+    If-None-Match: "10c24bc-4ab-457e1c1f"
     HTTP/1.1 304 Not Modified
     </code></pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETag的问题在于，它是根据可以辨别网站所在的服务器的具有唯一性的属性来生成的。当浏览器从一台服务器上获得页面内容后到另外一台服务器上进行进行验证时ETag就会不匹配，这种情况对于使用服务器组和处理请求的网站来说是非常常见的。默认情况下，Apache和IIS都会把数据嵌入ETag中，这会显著减少多服务器间的文件验证冲突。</p>
@@ -150,7 +150,7 @@ excerpt: 前端是涉及的内容是庞大的，恰当的优化不仅能够改�
     <h4>15、尽早刷新输出缓冲</h4>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当用户请求一个页面时，无论如何都会花费200到500毫秒用于后台组织HTML文件。在这期间，浏览器会一直空闲等待数据返回。在PHP中，你可以使用flush()方法，它允许你把已经编译好的部分HTML响应文件先发送给浏览器，这时浏览器就会可以下载文件中的内容（脚本等）而后台同事处理剩余的HTML页面。这样做的效果会在后台繁忙或者前台较空闲时更加明显。</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输出缓冲应用最好的一个地方就是紧跟在&lt;head/&gt;之后，因为HTML的头部分容易生成而且头部往往包含CSS和JavaScript文件，这样浏览器就可以在后台编译剩余HTML的同时并行下载它们。例子：</p>
-    <p><code>
+    <p><code class="html">
     …&lt;!-- css,js--&gt;
     &lt;/head&gt;
     &lt;?php flush();?&gt;
