@@ -20,7 +20,7 @@
   <h4>文章分类</h4>
   <ol class="list-unstyled">
     {% for category in site.categories %}
-    <li><span class="pull-right">（{{ category | last | size }}）</span><a href="{{ site.baseurl}}/show_by_category/?category={{ category | first }}">{% if category.first == 'skill' %}前端技能{% elseif category.first == 'life' %}生活随笔{% endif %}</a></li>
+    <li><span class="pull-right">（{{ category | last | size }}）</span><a href="{{ site.baseurl}}/show_by_category/?category={{ category | first }}">{% if category[0] == 'skill' %}前端技能{% elseif category[0] == 'life' %}生活随笔{% endif %}</a></li>
     {% endfor %}
   </ol>
 </div>
