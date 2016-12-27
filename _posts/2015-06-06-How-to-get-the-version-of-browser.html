@@ -13,7 +13,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
 <article>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
     <pre>
-    <code>
+    <code class="JavaScript">
     //return eg:6.0、7.0、8.0、9.0、10.0
     function getIEVer(){
         var agent = navigator.userAgent.toLowerCase();
@@ -32,7 +32,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应的JS判断浏览器的函数如下：</p>
     <pre>
-    <code>
+    <code class="JavaScript">
     function userBrowser(){  
         var browserName = navigator.userAgent.toLowerCase();  
         if(/msie/i.test(browserName) && !/opera/.test(browserName)){  
@@ -63,7 +63,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     </ol>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改后的JS判断浏览器版本的代码如下：</p>
     <pre>
-    <code>
+    <code class="JavaScript">
     /**
     *- Usually used browser compatibility.<br>
     *- Get browser name agent version.<br>
@@ -126,7 +126,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调用代码如下：</p>
     <pre>
-    <code>
+    <code class="JavaScript">
     //标签的css样兼容解决
     var bnv = getBrowserNV().toString();
     if(bnv.indexOf("ie") != -1 || bnv.indexOf("chrome") != -1){
