@@ -3,7 +3,7 @@ layout: default
 title: 浏览器版本重新判断
 category: skill
 tags: JavaScript
-excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的判断浏览器版本的方法，附上代码。
+excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的判断各主流浏览器（IE,Firefox,Chrome,Opera,Safari）版本的方法，附上代码。
 ---
 <h3>{{page.title}}</h3>
 <p class="author">
@@ -11,7 +11,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
 </p>
 <article>
-    <p>在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
     <pre>
     <code>
     //return eg:6.0、7.0、8.0、9.0、10.0
@@ -19,6 +19,119 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
         var agent = navigator.userAgent.toLowerCase();
         if(agent.indexOf("msie") > -1)
             return agent.match(/msie([\d.]+)/)[1];
+    }
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道，<code>navigator.userAgent</code>属性是一个只读的字符串，声明了浏览器用于HTTP请求的用户代理头信息。然后我们通过正则表达式获取浏览器的版本号。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于非IE浏览器，以下是一个通用的获取浏览器版本号的代码：</p>
+    <pre>
+    <code>
+    var agent=navigator.userAgent.toLowerCase();  
+    var browserVer=(agent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1];
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应的JS判断浏览器的函数如下：</p>
+    <pre>
+    <code>
+    function userBrowser(){  
+        var browserName = navigator.userAgent.toLowerCase();  
+        if(/msie/i.test(browserName) && !/opera/.test(browserName)){  
+            return "IE";  
+        }else if(/firefox/i.test(browserName)){  
+            return "Firefox";  
+        }else if(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName)){  
+            return "Chrome";  
+        }else if(/opera/i.test(browserName)){  
+            return "Opera";  
+        }else if(/webkit/i.test(browserName) &&!(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName))){  
+            return "Safari";  
+        }else{  
+            return "unKnow";  
+        }  
+    }   
+    </code>
+    </pre>
+    <p></p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IE11对IE的好多地方进行了修改，更接近兼容性标准，userAgent也随之改变，感觉它已经不是IE了。下面我们先来说说IE11的变化:</p>
+    <ol>
+        <li>navigator.userAgent中不再包含"MSIE"关键字。</li>
+        <li>"like Gecko" 令牌已添加（以便与其他浏览器一致）。</li>
+        <li>浏览器版本现在由新版本 ("rv") 令牌报告。</li>
+        <li>支持AddEventListener方法了，不需要再区分浏览器。</li>
+        <li>更具体的变化：<a href="http://msdn.microsoft.com/zh-cn/library/ie/dn265032(v=vs.85).aspx">http://msdn.microsoft.com/zh-cn/library/ie/dn265032(v=vs.85).aspx</a></li>
+        <li>不要通过检测浏览器的不同来检测Web 浏览器所支持功能的方法存在，要使用直接检测对该功能的支持.</li>
+    </ol>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改后的JS判断浏览器版本的代码如下：</p>
+    <pre>
+    <code>
+    /**
+    *- Usually used browser compatibility.<br>
+    *- Get browser name agent version.<br>
+    *-return browser name and version.<br>
+    *-return eg：ie9.0、ie11.0、firefox34.0、chrome37.0
+    */
+    function getBrowserNV(){
+        var agent = navigator.userAgent.toLowerCase();
+        var regStr_ie = /msie [\d.]+/gi ;
+        var regStr_ff = /firefox\/[\d.]+/gi
+        var regStr_chrome = /chrome\/[\d.]+/gi ;
+        var regStr_saf = /safari\/[\d.]+/gi ;
+        var browserNV = "";
+        //IE
+        if(agent.indexOf("msie") > 0){
+            browserNV = agent.match(regStr_ie) ;
+        }
+        //firefox
+        if(agent.indexOf("firefox") > 0){
+            browserNV = agent.match(regStr_ff) ;
+        }
+        //chrome
+        if(agent.indexOf("chrome") > 0){
+            browserNV = agent.match(regStr_chrome);
+        }
+        //safari
+        if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0){
+             browserNV = agent.match(regStr_saf) ;
+        }
+        browserNV = browserNV.toString();
+        //other
+        if("" == browserNV){
+            browserNV = "Is not a standard browser";
+        }
+        //Here does not display "/"
+        if(browserNV.indexOf('firefox')!= -1 || browserNV.indexOf('chrome')!= -1){
+            browserNV = browserNV.replace("/","");
+        }
+        //Here does not display space
+        if(browserNV.indexOf('msie')!= -1){
+            //msie replace IE & trim space
+            browserNV = browserNV.replace("msie","ie").replace(/\s/g,"");
+        }
+        if(browserNV == "Is not a standard browser"){
+            if(isIE()){
+                browserNV = "ie11.0";
+            }
+        }
+        //return eg:ie9.0 firefox34.0 chrome37.0
+        return browserNV;
+    }
+    //IE11
+    function isIE() { //IE
+        if (!!window.ActiveXObject || "ActiveXObject" in window)
+            return true;
+        else
+            return false;
+    }
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调用代码如下：</p>
+    <pre>
+    <code>
+    //标签的css样兼容解决
+    var bnv = getBrowserNV().toString();
+    if(bnv.indexOf("ie") != -1 || bnv.indexOf("chrome") != -1){
+        $("#attentiondiv").find("dd").addClass("attentdd");
+        $("#attentiondiv").find(".no_dt").addClass("attentnodt");
     }
     </code>
     </pre>
