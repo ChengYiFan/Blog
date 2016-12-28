@@ -12,10 +12,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 </p>
 <article>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JavaScript的性能问题是需要被格外关注的，这就需要我们在编写JavaScript程序时多注意一些细节。同时有一些常见的方法可以让你的JavaScript代码节约一些字节，同时提高可读性。一些总结如下：</p>
-	<p></p>
-	<h4>使用局部变量保存全局变量，尽量减少全局查找</h4>
-	<div class="line"></div>
-	<p></p>
+	<h4>减少全局查找</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个函数中会用到全局对象存储为局部变量来减少全局查找，因为访问局部变量的速度要比访问全局变量的速度更快些。</p>
 	<pre>
 	<code class="javascript">
@@ -30,6 +27,12 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	}
 	</code>
 	</pre>
+	<h4>条件分支</h4>
+	<ol>
+		<li>将条件分支，按可能性顺序从高到低排列：可以减少解释器对条件的探测次数</li>
+		<li>在同一条件的子条件分支&gt;2的情况时，使用switch优于if:switch分支选择的效率高于if,在IE下尤为明显，IE下switch的执行时间约为if的一半。</li>
+		<li>使用三元运算符替代非此即彼的if判断。<code>if(age>legalAge){canDrive=true;}else{canDrive=false;}</code>可以替换为：<code>var candrive = (age>legalAge)?true:false;</code></li>
+	</ol>
 </article>
 <div class="line"></div>
 <div class="tag-list">
