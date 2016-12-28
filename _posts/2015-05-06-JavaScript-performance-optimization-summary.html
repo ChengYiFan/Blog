@@ -1,0 +1,37 @@
+---
+layout: default
+title: JavaScript性能优化知识点总结
+category: skill
+tags: JavaScript
+excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我们在编写JavaScript程序时多注意一些细节。同时有一些常见的方法可以让你的JavaScript代码节约一些字节，同时提高可读性。
+---
+<h3>{{page.title}}</h3>
+<p class="author">
+    作者：<em class="color-pink">Cynthia</em> 
+    <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
+</p>
+<article>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JavaScript的性能问题是需要被格外关注的，这就需要我们在编写JavaScript程序时多注意一些细节。同时有一些常见的方法可以让你的JavaScript代码节约一些字节，同时提高可读性。一些总结如下：</p>
+	<h4>使用局部变量保存全局变量，尽量减少全局查找</h4>
+	<div class="line"></div>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个函数中会用到全局对象存储为局部变量来减少全局查找，因为访问局部变量的速度要比访问全局变量的速度更快些。</p>
+	<pre>
+	<code class="javascript">
+	//获取当前页面地址和主机域名
+	function getLocation(){
+		alert(window.location.href + window.location.host);
+	}
+	//最好的方式如下，先用一个变量把全局变量保存起来
+	function getLocation(){
+		var location = window.location;
+		alert(location.href + location.host);
+	}
+	</code>
+	</pre>
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+	{% endfor%}
+</div>
