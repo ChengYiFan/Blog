@@ -13,7 +13,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
 <article>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在IE11之前，我们可以通过以下方式<strong>获取IE浏览器的版本号</strong>：</p>
     <pre>
-    <code class="JavaScript">
+    <code class="javascript">
     //return eg:6.0、7.0、8.0、9.0、10.0
     function getIEVer(){
       var agent = navigator.userAgent.toLowerCase();
@@ -25,14 +25,14 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们知道，<code>navigator.userAgent</code>属性是一个只读的字符串，声明了浏览器用于HTTP请求的用户代理头信息。然后我们通过正则表达式获取浏览器的版本号。</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于非IE浏览器，以下是一个通用的获取浏览器版本号的代码：</p>
     <pre>
-    <code>
+    <code class="javascript">
     var agent=navigator.userAgent.toLowerCase();  
     var browserVer=(agent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1];
     </code>
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应的JS判断浏览器的函数如下：</p>
     <pre>
-    <code class="JavaScript">
+    <code class="javascript">
     function userBrowser(){  
       var browserName = navigator.userAgent.toLowerCase();  
       if(/msie/i.test(browserName) && !/opera/.test(browserName)){  
@@ -126,7 +126,7 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调用代码如下：</p>
     <pre>
-    <code class="JavaScript">
+    <code class="javascript">
     //标签的css样兼容解决
     var bnv = getBrowserNV().toString();
     if(bnv.indexOf("ie") != -1 || bnv.indexOf("chrome") != -1){
