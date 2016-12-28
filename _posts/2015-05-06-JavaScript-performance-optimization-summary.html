@@ -31,8 +31,19 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<ol>
 		<li>将条件分支，按可能性顺序从高到低排列：可以减少解释器对条件的探测次数</li>
 		<li>在同一条件的子条件分支&gt;2的情况时，使用switch优于if:switch分支选择的效率高于if,在IE下尤为明显，IE下switch的执行时间约为if的一半。</li>
-		<li>使用三元运算符替代非此即彼的if判断。<code>if(age>legalAge){canDrive=true;}else{canDrive=false;}</code>可以替换为：<code>var candrive = (age>legalAge)?true:false;</code></li>
+		<li>使用三元运算符替代非此即彼的if判断。示例如下：</li>
 	</ol>
+	<pre>
+	<code>
+	if(age>legalAge){
+		canDrive=true;
+	}else{
+		canDrive=false;
+	}
+	//可以替换为：
+	var candrive = (age>legalAge)?true:false;
+	</code>
+	</pre>
 </article>
 <div class="line"></div>
 <div class="tag-list">
