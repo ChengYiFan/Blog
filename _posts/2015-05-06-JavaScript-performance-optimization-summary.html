@@ -49,26 +49,26 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>默认值的分配</h4>
 	<p>对于变量未赋值时定义默认值的情况，与其使用if语句判断，不如使用一种更简洁的方式实现：</p>
 	<pre>
-<code class="javascript">
-function displayVal(limit){
-  var length;
-  if(limit){
-    length = limit;
-  }else{
-    length = 10;
-  }
-  for(var i = 0; i++; i <= length){
-    ···
-  }
-}
-//更简洁的方式
-function displayVal(limit){
-  var length = limit || 10;
-  for(var i = 0; i++; i <= length){
-    ···
-  }
-}
-</code>
+	<code class="javascript">
+	function displayVal(limit){
+	  var length;
+	  if(limit){
+	    length = limit;
+	  }else{
+	    length = 10;
+	  }
+	  for(var i = 0; i++; i <= length){
+	    ···
+	  }
+	}
+	//更简洁的方式
+	function displayVal(limit){
+	  var length = limit || 10;
+	  for(var i = 0; i++; i <= length){
+	    ···
+	  }
+	}
+	</code>
 	</pre>
 	<h4>定时器</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果针对的是不断运行的代码，不应该使用<code>setTimeout</code>，而应该是用<code>setInterval</code>，因为setTimeout每一次都会初始化一个定时器，而setInterval只会在开始的时候初始化一个定时器。</p>
