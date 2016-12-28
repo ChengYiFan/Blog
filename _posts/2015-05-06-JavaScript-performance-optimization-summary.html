@@ -15,7 +15,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>减少全局查找</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个函数中会用到全局对象存储为局部变量来减少全局查找，因为访问局部变量的速度要比访问全局变量的速度更快些。</p>
 	<pre>
-	<code class="JavaScript">
+	<code class="javascript">
 	//获取当前页面地址和主机域名
 	function getLocation(){
 	  alert(window.location.href + window.location.host);
@@ -34,7 +34,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li>使用三元运算符替代非此即彼的if判断。示例如下：</li>
 	</ol>
 	<pre>
-	<code class="JavaScript">
+	<code class="javascript">
 	if(age > legalAge){
 	   canDrive = true;
 	}else{
@@ -73,7 +73,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>定时器</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果针对的是不断运行的代码，不应该使用<code>setTimeout</code>，而应该是用<code>setInterval</code>，因为setTimeout每一次都会初始化一个定时器，而setInterval只会在开始的时候初始化一个定时器。</p>
 	<pre>
-	<code>
+	<code class="javascript">
 	var timeoutTimes = 0;
 	function timeout(){
 	  timeoutTimes++;
