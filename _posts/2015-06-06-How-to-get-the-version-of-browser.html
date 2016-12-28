@@ -16,9 +16,9 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     <code class="JavaScript">
     //return eg:6.0、7.0、8.0、9.0、10.0
     function getIEVer(){
-        var agent = navigator.userAgent.toLowerCase();
-        if(agent.indexOf("msie") > -1)
-            return agent.match(/msie([\d.]+)/)[1];
+      var agent = navigator.userAgent.toLowerCase();
+      if(agent.indexOf("msie") > -1)
+        return agent.match(/msie([\d.]+)/)[1];
     }
     </code>
     </pre>
@@ -34,20 +34,20 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     <pre>
     <code class="JavaScript">
     function userBrowser(){  
-        var browserName = navigator.userAgent.toLowerCase();  
-        if(/msie/i.test(browserName) && !/opera/.test(browserName)){  
-            return "IE";  
-        }else if(/firefox/i.test(browserName)){  
-            return "Firefox";  
-        }else if(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName)){  
-            return "Chrome";  
-        }else if(/opera/i.test(browserName)){  
-            return "Opera";  
-        }else if(/webkit/i.test(browserName) &&!(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName))){  
-            return "Safari";  
-        }else{  
-            return "unKnow";  
-        }  
+      var browserName = navigator.userAgent.toLowerCase();  
+      if(/msie/i.test(browserName) && !/opera/.test(browserName)){  
+        return "IE";  
+      }else if(/firefox/i.test(browserName)){  
+        return "Firefox";  
+      }else if(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName)){  
+        return "Chrome";  
+      }else if(/opera/i.test(browserName)){  
+        return "Opera";  
+      }else if(/webkit/i.test(browserName) &&!(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName))){  
+        return "Safari";  
+      }else{  
+        return "unKnow";  
+       }  
     }   
     </code>
     </pre>
@@ -71,56 +71,56 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     *-return eg：ie9.0、ie11.0、firefox34.0、chrome37.0
     */
     function getBrowserNV(){
-        var agent = navigator.userAgent.toLowerCase();
-        var regStr_ie = /msie [\d.]+/gi ;
-        var regStr_ff = /firefox\/[\d.]+/gi
-        var regStr_chrome = /chrome\/[\d.]+/gi ;
-        var regStr_saf = /safari\/[\d.]+/gi ;
-        var browserNV = "";
-        //IE
-        if(agent.indexOf("msie") > 0){
-            browserNV = agent.match(regStr_ie) ;
+      var agent = navigator.userAgent.toLowerCase();
+      var regStr_ie = /msie [\d.]+/gi ;
+      var regStr_ff = /firefox\/[\d.]+/gi
+      var regStr_chrome = /chrome\/[\d.]+/gi ;
+      var regStr_saf = /safari\/[\d.]+/gi ;
+      var browserNV = "";
+      //IE
+      if(agent.indexOf("msie") > 0){
+        browserNV = agent.match(regStr_ie) ;
+      }
+      //firefox
+      if(agent.indexOf("firefox") > 0){
+        browserNV = agent.match(regStr_ff) ;
+      }
+      //chrome
+      if(agent.indexOf("chrome") > 0){
+        browserNV = agent.match(regStr_chrome);
+      }
+      //safari
+      if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0){
+        browserNV = agent.match(regStr_saf) ;
+      }
+      browserNV = browserNV.toString();
+      //other
+      if("" == browserNV){
+        browserNV = "Is not a standard browser";
+      }
+      //Here does not display "/"
+      if(browserNV.indexOf('firefox')!= -1 || browserNV.indexOf('chrome')!= -1){
+        browserNV = browserNV.replace("/","");
+      }
+      //Here does not display space
+      if(browserNV.indexOf('msie')!= -1){
+        //msie replace IE & trim space
+        browserNV = browserNV.replace("msie","ie").replace(/\s/g,"");
+      }
+      if(browserNV == "Is not a standard browser"){
+        if(isIE()){
+          browserNV = "ie11.0";
         }
-        //firefox
-        if(agent.indexOf("firefox") > 0){
-            browserNV = agent.match(regStr_ff) ;
-        }
-        //chrome
-        if(agent.indexOf("chrome") > 0){
-            browserNV = agent.match(regStr_chrome);
-        }
-        //safari
-        if(agent.indexOf("safari") > 0 && agent.indexOf("chrome") < 0){
-             browserNV = agent.match(regStr_saf) ;
-        }
-        browserNV = browserNV.toString();
-        //other
-        if("" == browserNV){
-            browserNV = "Is not a standard browser";
-        }
-        //Here does not display "/"
-        if(browserNV.indexOf('firefox')!= -1 || browserNV.indexOf('chrome')!= -1){
-            browserNV = browserNV.replace("/","");
-        }
-        //Here does not display space
-        if(browserNV.indexOf('msie')!= -1){
-            //msie replace IE & trim space
-            browserNV = browserNV.replace("msie","ie").replace(/\s/g,"");
-        }
-        if(browserNV == "Is not a standard browser"){
-            if(isIE()){
-                browserNV = "ie11.0";
-            }
-        }
-        //return eg:ie9.0 firefox34.0 chrome37.0
-        return browserNV;
+      }
+      //return eg:ie9.0 firefox34.0 chrome37.0
+      return browserNV;
     }
     //IE11
     function isIE() { //IE
-        if (!!window.ActiveXObject || "ActiveXObject" in window)
-            return true;
-        else
-            return false;
+      if (!!window.ActiveXObject || "ActiveXObject" in window)
+        return true;
+      else
+        return false;
     }
     </code>
     </pre>
@@ -130,8 +130,8 @@ excerpt: IE11所用内核已与之前版本大有不同，这里给出了新的�
     //标签的css样兼容解决
     var bnv = getBrowserNV().toString();
     if(bnv.indexOf("ie") != -1 || bnv.indexOf("chrome") != -1){
-        $("#attentiondiv").find("dd").addClass("attentdd");
-        $("#attentiondiv").find(".no_dt").addClass("attentnodt");
+      $("#attentiondiv").find("dd").addClass("attentdd");
+      $("#attentiondiv").find(".no_dt").addClass("attentnodt");
     }
     </code>
     </pre>

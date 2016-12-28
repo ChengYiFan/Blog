@@ -18,12 +18,12 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<code class="javascript">
 	//获取当前页面地址和主机域名
 	function getLocation(){
-		alert(window.location.href + window.location.host);
+	  alert(window.location.href + window.location.host);
 	}
 	//最好的方式如下，先用一个变量把全局变量保存起来
 	function getLocation(){
-		var location = window.location;
-		alert(location.href + location.host);
+	  var location = window.location;
+	  alert(location.href + location.host);
 	}
 	</code>
 	</pre>
@@ -35,13 +35,13 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</ol>
 	<pre>
 	<code>
-	if(age>legalAge){
-		canDrive=true;
+	if(age > legalAge){
+	   canDrive = true;
 	}else{
-		canDrive=false;
+	   canDrive = false;
 	}
 	//可以替换为：
-	var candrive = (age>legalAge)?true:false;
+	var candrive = (age > legalAge) ? true : false;
 	</code>
 	</pre>
 </article>
