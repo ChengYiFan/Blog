@@ -15,7 +15,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>减少全局查找</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个函数中会用到全局对象存储为局部变量来减少全局查找，因为访问局部变量的速度要比访问全局变量的速度更快些。</p>
 	<pre>
-	<code class="javascript">
+	<code class="JavaScript">
 	//获取当前页面地址和主机域名
 	function getLocation(){
 	  alert(window.location.href + window.location.host);
@@ -34,7 +34,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li>使用三元运算符替代非此即彼的if判断。示例如下：</li>
 	</ol>
 	<pre>
-	<code>
+	<code class="JavaScript">
 	if(age > legalAge){
 	   canDrive = true;
 	}else{
@@ -44,6 +44,33 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	var candrive = (age > legalAge) ? true : false;
 	</code>
 	</pre>
+	<h4>数字转换成字符串</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般最好用""+1来将数字转换成字符串，虽然看起来比较丑一点，但事实上这个效率是最高的，从性能上来说：<code>(""+1)&gt;String()&gt;.toString()&gt;new String()</code></p>
+	<h4>默认值的分配</h4>
+	<p>对于变量未赋值时定义默认值的情况，与其使用if语句判断，不如使用一种更简洁的方式实现：</p>
+	<pre><code>
+	function displayVal(limit){
+	  var length;
+	  if(limit){
+	    length = limit;
+	  }else{
+	    length = 10;
+	  }
+	  for(var i = 0; i++; i <= length){
+	    ···
+	  }
+	}
+	//更简洁的方式
+	function displayVal(limit){
+	  var length = limit || 10;
+	  for(var i = 0; i++; i <= length){
+	    ···
+	  }
+	}
+	</code></pre>
+	<h4>定时器</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果针对的是不断运行的代码，不应该使用<code>setTimeout</code>，而应该是用<code>setInterval</code>，因为setTimeout每一次都会初始化一个定时器，而setInterval只会在开始的时候初始化一个定时器。</p>
+	
 </article>
 <div class="line"></div>
 <div class="tag-list">
