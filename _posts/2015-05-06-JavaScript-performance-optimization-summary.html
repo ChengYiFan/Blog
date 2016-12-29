@@ -128,6 +128,18 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	}
 	var all = buf.join("");
 	</code></pre>
+	<h4>变量递增/递减/乘/除</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果你想递增或递减一个变量，类似下面：</p>
+	<pre><code class="javascript">
+	growCount = growCount + 1;
+	shrinkCount = shrinkCount - 1;
+	//可以以下面的方式书写：
+	growCount ++;
+	shrinkCount --;
+	//乘除也可以以这种方式书写：
+	moreSweets *=  5;
+	lessApple /= 2;
+	</code></pre>
 	<h4>插入迭代器</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如 <code>var name = values[i]; i++;</code>前面两条语句可以写成<code>var name = values[i++];</code></p>
 	<h4>使用直接量</h4>
@@ -179,12 +191,45 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	  frag.appendChild(el);
 	}
 	document.body.appendChild(frag);
-	//可替换我：
+	//可替换为：
 	var html = [];
 	for(var i = 0; i < 1000; i++){
 	  html.push('&lt;p&gt;'+ i + '&lt;/p&gt;');
 	}
 	document.body.innerHTML = html.join("");
+	</code></pre>
+	<h4>通过模板元素clone，替代createElement</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;很多人喜欢在JavaScript中使用document.write来给页面生成内容。事实上这样的效率很低，如果需要直接插入HTML,可以找一个容器元素，比如指定一个div或者span，并设置他们的innerHTML来将自己的HTML代码插入到页面中。通过我们可能会使用字符串直接写HTML来创建节点。这样做有两个弊端，首先无法保证代码的有效性；其次字符串操作效率低，所以应该是用document.createElement()方法，而如果文档中存在现成的样板节点，应该是用cloneNode()方法。因为使用createElement()方法后，你需要设置多次元素的属性，使用cloneNode()则可减少属性的设置次数——同样如果需要创建很多元素，应该先准备一个样板节点。</p>
+	<pre><code class="javascript">
+	var frag = document.createDocumentFragment();
+	for(var i = 0; i < 1000; i++){
+	  var el = document.createElement('p');
+	  el.innerHTML = i;
+	  frag.appendChild(el);
+	}
+	document.body.appendChild(frag);
+	//替换为
+	var frag = document.createDocumentFragment();
+	var pEl = document.getElementsByTagName('p')[0];
+	for(var i = 0; i < 1000; i ++){
+	  var el = pEl.cloneNode(false);
+	  el.innerHTML = i;
+	  frag.appendChild(el);
+	}
+	document.body.appendChild(frag);
+	</code></pre>
+	<h4>使用firstChild和nextSibling代替childNodes遍历dom元素</h4>
+	<pre><code class="javascript">
+	var nodes = element.childNodes;
+	for(var i = 0; i < nodes.length;i++){
+	  var node = nodes[i];//······
+	}
+	//可以替换为：
+	var node = element.firstChild;
+	while(node){
+	  ······
+      node = node.nextSibling;
+	}
 	</code></pre>
 </article>
 <div class="line"></div>
