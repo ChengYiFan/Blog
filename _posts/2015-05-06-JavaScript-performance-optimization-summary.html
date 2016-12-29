@@ -182,7 +182,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	//可替换我：
 	var html = [];
 	for(var i = 0; i < 1000; i++){
-	  html.push('<p>'+ i + '</p>');
+	  html.push('&lt;p&gt;'+ i + '&lt;/p&gt;');
 	}
 	document.body.innerHTML = html.join("");
 	</code></pre>
