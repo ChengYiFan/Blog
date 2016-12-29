@@ -44,8 +44,6 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	var candrive = (age > legalAge) ? true : false;
 	</code>
 	</pre>
-	<h4>数字转换成字符串</h4>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般最好用""+1来将数字转换成字符串，虽然看起来比较丑一点，但事实上这个效率是最高的，从性能上来说：<code>(""+1)&gt;String()&gt;.toString()&gt;new String()</code></p>
 	<h4>默认值的分配</h4>
 	<p>对于变量未赋值时定义默认值的情况，与其使用if语句判断，不如使用一种更简洁的方式实现：</p>
 	<pre>
@@ -93,6 +91,45 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	var interv = setInterval(interval,10);
 	</code>
 	</pre>
+	<h4>数字转换成字符串</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般最好用""+1来将数字转换成字符串，虽然看起来比较丑一点，但事实上这个效率是最高的，从性能上来说：<code>(""+1)&gt;String()&gt;.toString()&gt;new String()</code></p>
+	<h4>浮点数转换成整型</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;许多人喜欢使用parseInt(),其实parseInt()是用于将字符串转换成数字，而不是浮点数和整型之间的转换，我们应该使用Math.floor或者Math.round()。</p>
+	<h4>各种类型转换</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果定义了toString()方法来进行类型转换的话，推荐显式调用toString(),因为内部的操作在尝试所有的可能性之后，会尝试对象的toString()方法，尝试能否转化为String,所以直接调用这个方法效率会更高。</p>
+	<pre>
+	<code class="javascript">
+	var myVar = "3.14159", 
+	    str = "" + myVar, //to string
+	    i_int = ~~myVar, //to integer
+	    f_float = 1*myVar, // to float
+	    b_bool = !!myVar, /**to boolean any string with length and any number except 0 are true*/
+	    array = [myVar]; //to array
+	</code>
+	</pre>
+	<h4>多个类型声明</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在JavaScript中所有变量都可以使用单个var语句来声明，这样可将声明组合在一起，以减少整个脚本的执行时间，就如上面代码一样，上面代码格式也挺规范，让人一看就明了。</p>
+	<h4>字符串连接</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要连接多个字符串，应该少使用+=，如</p>
+	<pre>
+	<code class="javascript">
+	s += a;
+	s += b;
+	s += c;
+	//应该写成
+	s += a + b + c;
+	</code>
+	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而如果是收集字符串，比如多次对同一个字符串进行 += 操作的话，最好使用一个缓存，使用JavaScript数组来收集，最后使用join方法连接起来。</p>
+	<pre><code class="javascript">
+	var buf = [];
+	for(var i = 0; i < 100; i ++){
+	  buf.push(i.toString());
+	}
+	var all = buf.join("");
+	</code></pre>
+	<h4>插入迭代器</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如 <code>var name = values[i]; i++;</code>前面两条语句可以写成<code>var name = values[i++];</code></p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
