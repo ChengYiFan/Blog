@@ -227,9 +227,22 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	//可以替换为：
 	var node = element.firstChild;
 	while(node){
-	  ······
       node = node.nextSibling;
 	}
+	</code></pre>
+	<h4>删除DOM节点</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>删除dom节点之前，一定要删除注册在该节点上的事件。</strong>不管是用observe方式还是用attachEvent方式注册的事件，否则将会产生无法回收的内存。另外，在removeChild和innerHTML二者之间，尽量选择后者。因为在sIEve（内存泄露监测工具）中监测的结果是用removeChild无法有效地释放dom节点。</p>
+	<h4>使用事件代理</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何可以冒泡的事件都不仅仅可以在事件目标上进行处理，目标的任何祖先节点上也能处理，使用这个知识就可以将事件处理程序附加到更高的地方负责多个目标的事件处理，同样，<strong>对于内容动态增加并且子节点都需要相同的事件处理函数的情况，可以把事件注册到父节点上，这样就不需要为每个子节点注册事件监听了</strong>。另外，现有的js库都采用observe方式来创建事件监听，其实现上隔离了dom对象和事件处理函数之间的循环引用，所以应该尽量采用这种方式来创建事件监听。</p>
+	<h4>重复使用的调用结果，事先保存到局部变量</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免多次取值的调用开销，示例如下：</p>
+	<pre><code class="javascript">
+	var h1 = element1.clientHeight + num1;
+	var h2 = element1.clientHeight + num2;
+	//可以替换为：
+	var eleHeight = element1.clientHeight;
+	var h1 = eleHeight + num1;
+	var h2 = eleHeight + num2;
 	</code></pre>
 </article>
 <div class="line"></div>
