@@ -16,15 +16,15 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在一个函数中会用到全局对象存储为局部变量来减少全局查找，因为访问局部变量的速度要比访问全局变量的速度更快些。</p>
 	<pre>
 	<code class="javascript">
-	//获取当前页面地址和主机域名
-	function getLocation(){
-	  alert(window.location.href + window.location.host);
-	}
-	//最好的方式如下，先用一个变量把全局变量保存起来
-	function getLocation(){
-	  var location = window.location;
-	  alert(location.href + location.host);
-	}
+    //获取当前页面地址和主机域名
+    function getLocation(){
+      alert(window.location.href + window.location.host);
+    }
+    //最好的方式如下，先用一个变量把全局变量保存起来
+    function getLocation(){
+      var location = window.location;
+      alert(location.href + location.host);
+    }
 	</code>
 	</pre>
 	<h4>条件分支</h4>
@@ -35,13 +35,13 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</ol>
 	<pre>
 	<code class="javascript">
-	if(age > legalAge){
-	   canDrive = true;
-	}else{
-	   canDrive = false;
-	}
-	//可以替换为：
-	var candrive = (age > legalAge) ? true : false;
+    if(age > legalAge){
+      canDrive = true;
+    }else{
+      canDrive = false;
+    }
+    //可以替换为：
+    var candrive = (age > legalAge) ? true : false;
 	</code>
 	</pre>
 	<h4>默认值的分配</h4>
@@ -72,23 +72,23 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果针对的是不断运行的代码，不应该使用<code>setTimeout</code>，而应该是用<code>setInterval</code>，因为setTimeout每一次都会初始化一个定时器，而setInterval只会在开始的时候初始化一个定时器。</p>
 	<pre>
 	<code class="javascript">
-	var timeoutTimes = 0;
-	function timeout(){
+    var timeoutTimes = 0;
+    function timeout(){
 	  timeoutTimes++;
 	  if(timeoutTimes < 10){
 	    setTimeout(timeout,10);
 	  }
-	}	
-	timeout();
-	//可以转化为
-	var intervalTimes = 0;
-	function interval(){
-	  intervalTimes++;
-	  if(intervalTimes >= 10){
+    }	
+    timeout();
+    //可以转化为
+    var intervalTimes = 0;
+    function interval(){
+      intervalTimes++;
+      if(intervalTimes >= 10){
 	    clearInterval(interv);
 	  }
-	}
-	var interv = setInterval(interval,10);
+    }
+    var interv = setInterval(interval,10);
 	</code>
 	</pre>
 	<h4>数字转换成字符串</h4>
@@ -99,12 +99,12 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果定义了toString()方法来进行类型转换的话，推荐显式调用toString(),因为内部的操作在尝试所有的可能性之后，会尝试对象的toString()方法，尝试能否转化为String,所以直接调用这个方法效率会更高。</p>
 	<pre>
 	<code class="javascript">
-	var myVar = "3.14159", 
-	str = "" + myVar, //to string
-	i_int = ~~myVar, //to integer
-	f_float = 1*myVar, // to float
-	b_bool = !!myVar, /**to boolean any string with length and any number except 0 are true*/
-	array = [myVar]; //to array
+    var myVar = "3.14159", 
+    str = "" + myVar, //to string
+    i_int = ~~myVar, //to integer
+    f_float = 1*myVar, // to float
+    b_bool = !!myVar, /**to boolean any string with length and any number except 0 are true*/
+    array = [myVar]; //to array
 	</code>
 	</pre>
 	<h4>多个类型声明</h4>
@@ -113,33 +113,35 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要连接多个字符串，应该少使用+=，如</p>
 	<pre>
 	<code class="javascript">
-	s += a;
-	s += b;
-	s += c;
-	//应该写成
-	s += a + b + c;
+    s += a;
+    s += b;
+    s += c;
+    //应该写成
+    s += a + b + c;
 	</code>
 	</pre>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而如果是收集字符串，比如多次对同一个字符串进行 += 操作的话，最好使用一个缓存，使用JavaScript数组来收集，最后使用join方法连接起来。</p>
-	<pre><code class="javascript">
-	var buf = [];
-	for(var i = 0; i < 100; i ++){
+	<pre>
+	<code class="javascript">
+    var buf = [];
+    for(var i = 0; i < 100; i ++){
 	  buf.push(i.toString());
-	}
-	var all = buf.join("");
-	</code></pre>
+    }
+    var all = buf.join("");
+    </code>
+    </pre>
 	<h4>变量递增/递减/乘/除</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果你想递增或递减一个变量，类似下面：</p>
 	<pre>
 	<code class="javascript">
-	growCount = growCount + 1;
-	shrinkCount = shrinkCount - 1;
-	//可以以下面的方式书写：
-	growCount ++;
-	shrinkCount --;
-	//乘除也可以以这种方式书写：
-	moreSweets *=  5;
-	lessApple /= 2;
+    growCount = growCount + 1;
+    shrinkCount = shrinkCount - 1;
+    //可以以下面的方式书写：
+    growCount ++;
+    shrinkCount --;
+    //乘除也可以以这种方式书写：
+    moreSweets *=  5;
+    lessApple /= 2;
 	</code>
 	</pre>
 	<h4>插入迭代器</h4>
@@ -147,101 +149,101 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>使用直接量</h4>
 	<pre>
 	<code class="javascript">
-	var aTest = new Array();
-	//替换为
-	var aTest = [];
+    var aTest = new Array();
+    //替换为
+    var aTest = [];
 
-	var aTest = new Object;
-	//替换为
-	var aTest = {};
+    var aTest = new Object;
+    //替换为
+    var aTest = {};
 
-	var reg = new RegExp();
-	//替换为
-	var reg = /.../;
+    var reg = new RegExp();
+    //替换为
+    var reg = /.../;
 	</code>
 	</pre>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要创建具有一些特性的一般对象，也可以使用字面量，如下：</p>
 	<pre>
 	<code class="javascript">
-	var oFruit = new O;
-	oFruit.color = "red";
-	oFruit.name = "apple";
-	//前面的代码可用对象字面量来改写成这样：
-	var oFruit = {color:"red", name:"apple"};
+    var oFruit = new O;
+    oFruit.color = "red";
+    oFruit.name = "apple";
+    //前面的代码可用对象字面量来改写成这样：
+    var oFruit = {color:"red", name:"apple"};
 	</code>
 	</pre>
 	<h4>使用DocumentFragment优化多次append</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一旦需要更新DOM，请考虑使用文档碎片来构建DOM结构，然后再将其添加到现存的文档中。</p>
 	<pre>
 	<code class="javascript">
-	for(var i = 0; i < 1000; i++){
-	  var el = document.createElement('p');
-	  el.innerHTML = i;
-	  document.body.appendChild(el);
-	}
-	//可替换为：
-	var frag = document.createDocumentFragment();
-	for(var i = 0; i < 1000; i++){
-	  var el = document.createElement('p');
-	  el.innerHTML = i;
-	  frag.appendChild(el);
-	}
-	document.body.appendChild(frag);
+    for(var i = 0; i < 1000; i++){
+      var el = document.createElement('p');
+      el.innerHTML = i;
+      document.body.appendChild(el);
+    }
+    //可替换为：
+    var frag = document.createDocumentFragment();
+    for(var i = 0; i < 1000; i++){
+      var el = document.createElement('p');
+      el.innerHTML = i;
+      frag.appendChild(el);
+    }
+    document.body.appendChild(frag);
 	</code>
 	</pre>
 	<h4>使用一次innerHTML赋值代替构建dom元素</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于大的DOM更改，使用innerHTML要比使用标准的DOM方法创建同样的DOM结构快得多。</p>
 	<pre>
 	<code class="javascript">
-	var frag = document.createDocumentFragment();
-	for(var i = 0; i < 1000; i++){
-	  var el = document.createElement('p');
-	  el.innerHTML = i;
-	  frag.appendChild(el);
-	}
-	document.body.appendChild(frag);
-	//可替换为：
-	var html = [];
-	for(var i = 0; i < 1000; i++){
-	  html.push('&lt;p&gt;'+ i + '&lt;/p&gt;');
-	}
-	document.body.innerHTML = html.join("");
+    var frag = document.createDocumentFragment();
+    for(var i = 0; i < 1000; i++){
+      var el = document.createElement('p');
+      el.innerHTML = i;
+      frag.appendChild(el);
+    }
+    document.body.appendChild(frag);
+    //可替换为：
+    var html = [];
+    for(var i = 0; i < 1000; i++){
+      html.push('&lt;p&gt;'+ i + '&lt;/p&gt;');
+    }
+    document.body.innerHTML = html.join("");
 	</code>
 	</pre>
 	<h4>通过模板元素clone，替代createElement</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;很多人喜欢在JavaScript中使用document.write来给页面生成内容。事实上这样的效率很低，如果需要直接插入HTML,可以找一个容器元素，比如指定一个div或者span，并设置他们的innerHTML来将自己的HTML代码插入到页面中。通过我们可能会使用字符串直接写HTML来创建节点。这样做有两个弊端，首先无法保证代码的有效性；其次字符串操作效率低，所以应该是用document.createElement()方法，而如果文档中存在现成的样板节点，应该是用cloneNode()方法。因为使用createElement()方法后，你需要设置多次元素的属性，使用cloneNode()则可减少属性的设置次数——同样如果需要创建很多元素，应该先准备一个样板节点。</p>
 	<pre>
 	<code class="javascript">
-	var frag = document.createDocumentFragment();
-	for(var i = 0; i < 1000; i++){
-	  var el = document.createElement('p');
-	  el.innerHTML = i;
-	  frag.appendChild(el);
-	}
-	document.body.appendChild(frag);
-	//替换为
-	var frag = document.createDocumentFragment();
-	var pEl = document.getElementsByTagName('p')[0];
-	for(var i = 0; i < 1000; i ++){
-	  var el = pEl.cloneNode(false);
-	  el.innerHTML = i;
-	  frag.appendChild(el);
-	}
-	document.body.appendChild(frag);
+    var frag = document.createDocumentFragment();
+    for(var i = 0; i < 1000; i++){
+      var el = document.createElement('p');
+      el.innerHTML = i;
+      frag.appendChild(el);
+    }
+    document.body.appendChild(frag);
+    //替换为
+    var frag = document.createDocumentFragment();
+    var pEl = document.getElementsByTagName('p')[0];
+    for(var i = 0; i < 1000; i ++){
+      var el = pEl.cloneNode(false);
+      el.innerHTML = i;
+      frag.appendChild(el);
+    }
+    document.body.appendChild(frag);
 	</code>
 	</pre>
 	<h4>使用firstChild和nextSibling代替childNodes遍历dom元素</h4>
 	<pre>
 	<code class="javascript">
-	var nodes = element.childNodes;
-	for(var i = 0; i < nodes.length;i++){
-	  var node = nodes[i];//······
-	}
-	//可以替换为：
-	var node = element.firstChild;
-	while(node){
+    var nodes = element.childNodes;
+    for(var i = 0; i < nodes.length;i++){
+      var node = nodes[i];//······
+    }
+    //可以替换为：
+    var node = element.firstChild;
+    while(node){
       node = node.nextSibling;
-	}
+    }
 	</code>
 	</pre>
 	<h4>删除DOM节点</h4>
@@ -252,20 +254,22 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免多次取值的调用开销，示例如下：</p>
 	<pre>
 	<code class="javascript">
-	var h1 = element1.clientHeight + num1;
-	var h2 = element1.clientHeight + num2;
-	//可以替换为：
-	var eleHeight = element1.clientHeight;
-	var h1 = eleHeight + num1;
-	var h2 = eleHeight + num2;
+    var h1 = element1.clientHeight + num1;
+    var h2 = element1.clientHeight + num2;
+    //可以替换为：
+    var eleHeight = element1.clientHeight;
+    var h1 = eleHeight + num1;
+    var h2 = eleHeight + num2;
 	</code>
 	</pre>
 	<h4>注意NodeList</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最小化访问NodeList的次数可以极大的改进脚本的性能</p>
-	<pre><code class="javascript">
-	var images = document.getElementsByTagName('img');
-	for(var i = 0; i < images.length; i++){}
-	</code></pre>
+	<pre>
+	<code class="javascript">
+    var images = document.getElementsByTagName('img');
+    for(var i = 0; i < images.length; i++){}
+	</code>
+	</pre>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编写JavaScript的时候一定要知道何时返回NodeList对象，这样可以最小化对它们的访问。</p>
 	<ul>
 		<li>进行了对getElementsByTagName()的调用</li>
@@ -283,15 +287,15 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于每次循环过程都会计算终止条件，所以必须保证它尽可能快，也就是说避免属性查找或者其它的操作，最好是将循环控制量保存到局部变量中，也就是说对数组或列表对象进行遍历时，提前将length保存到局部变量中，避免在循环的每一步重复取值。</p>
 		<pre>
 		<code class="javascript">
-	var list = document.getElementsByTagName('p');
-	for(var i = 0; i < list.length; i++){ 
+    var list = document.getElementsByTagName('p');
+    for(var i = 0; i < list.length; i++){ 
 	  //··· 
-	}
-	//替换为：
-	var list = document.getElementsByTagName('p');
-	for(var i = 0, l = list.length; i < l; i++){ 
+    }
+    //替换为：
+    var list = document.getElementsByTagName('p');
+    for(var i = 0, l = list.length; i < l; i++){ 
 	  //··· 
-	}
+    }
 		</code>
 		</pre>
 		</dd>
