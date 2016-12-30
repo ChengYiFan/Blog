@@ -262,9 +262,9 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以使用下面几种方式来优化循环</p>
 	<dl>
 		<dt>减值迭代</dt>
-		<dd>大多数循环使用一个从0开始、增加到某个特定值的迭代器，在很多情况下，从最大值开始，在循环中不断减值的迭代器更加有效。</dd>
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大多数循环使用一个从0开始、增加到某个特定值的迭代器，在很多情况下，从最大值开始，在循环中不断减值的迭代器更加有效。</p></dd>
 		<dt>简化终止条件</dt>
-		<dd>由于每次循环过程都会计算终止条件，所以必须保证它尽可能快，也就是说避免属性查找或者其它的操作，最好是将循环控制量保存到局部变量中，也就是说对数组或列表对象进行遍历时，提前将length保存到局部变量中，避免在循环的每一步重复取值。
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于每次循环过程都会计算终止条件，所以必须保证它尽可能快，也就是说避免属性查找或者其它的操作，最好是将循环控制量保存到局部变量中，也就是说对数组或列表对象进行遍历时，提前将length保存到局部变量中，避免在循环的每一步重复取值。</p>
 		<pre><code class="javascript">
 		var list = document.getElementsByTagName('p');
 		for(var i = 0; i < list.length; i++){ //··· }
@@ -274,9 +274,9 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		</code></pre>
 		</dd>
 		<dt>简化循环体</dt>
-		<dd>循环体是执行最多的，所以要确保其被最大限度地优化。</dd>
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;循环体是执行最多的，所以要确保其被最大限度地优化。</p></dd>
 		<dt>使用后测试循环</dt>
-		<dd>在JavaScript中，我们可以使用for(;;),while(),for(in)三种循环，事实上，这三种循环中for(in)的效率极差，因为它需要查询散列键，只要可以，就应该尽量少用。for(;;)和while循环，while循环的效率要优于for(;;),可能是因为for(;;)结构的问题，需要经常跳转回去。
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在JavaScript中，我们可以使用for(;;),while(),for(in)三种循环，事实上，这三种循环中for(in)的效率极差，因为它需要查询散列键，只要可以，就应该尽量少用。for(;;)和while循环，while循环的效率要优于for(;;),可能是因为for(;;)结构的问题，需要经常跳转回去。</p>
         <pre><code class="javascript">
         var arr = [1,2,3,4,5,6,7], sum = 0;
         for(var i = 0, l = arr.length; i < l; i++){
@@ -286,11 +286,19 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
         var arr = [1,2,3,4,5,6,7], sum = 0, l = arr.length;
         while(l--){  sum += arr[l]; }
         </code></pre>
-        最常用的for循环和while循环都是前测试循环，而如do-while这种后测试循环，可以避免最初终止条件的计算，因此运行更快。
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最常用的for循环和while循环都是前测试循环，而如do-while这种后测试循环，可以避免最初终止条件的计算，因此运行更快。</p>
 		</dd>
 	</dl>
 	<h4>展开循环</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当循环次数是确定的，消除循环并使用多次函数调用往往会更快。</p>
+	<h4>避免双重解释</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要提高代码性能，尽可能避免出现需要按照JavaScript解释的字符串，也就是：</p>
+	<dl>
+		<dt>尽量少使用eval函数</dt>
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用eval相当于在运行时再次调用解释引擎对内容进行运行，需要消耗大量时间，而且使用Eval带来的安全性问题也是不容忽视的。</p></dd>
+		<dt>不要使用Function构造器</dt>
+		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要给setTimeout或者setInterval传递字符串参数。<code>var num = 0; setTimeout('num++', 10);</code>//可以替换为：<code>var num = 0; function addNum(){num ++;} setTimeout(addNum,10);</code></p></dd>
+	</dl>
 </article>
 <div class="line"></div>
 <div class="tag-list">
