@@ -324,11 +324,12 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要给setTimeout或者setInterval传递字符串参数。<code>var num = 0; setTimeout('num++', 10);</code>//可以替换为：<code>var num = 0; function addNum(){num ++;} setTimeout(addNum,10);</code></p></dd>
 	</dl>
 	<h4>缩短否定检测</h4>
-	<pre><code class="javascript">
-	if(oTest != '#ff0000'){ 
-	  //do something
-	}
-	if(oTest != null){ 
+	<pre>
+	<code class="javascript">
+    if(oTest != '#ff0000'){ 
+      //do something
+    }
+    if(oTest != null){ 
 	  //do something
 	}
     if(oTest != false){ 
