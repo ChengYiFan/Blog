@@ -244,6 +244,30 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	var h1 = eleHeight + num1;
 	var h2 = eleHeight + num2;
 	</code></pre>
+	<h4>注意NodeList</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最小化访问NodeList的次数可以极大的改进脚本的性能</p>
+	<pre><code class="javascript">
+	var images = document.getElementsByTagName('img');
+	for(var i = 0; i < images.length; i++){}
+	</code></pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编写JavaScript的时候一定要知道何时返回NodeList对象，这样可以最小化对它们的访问。</p>
+	<ul>
+		<li>进行了对getElementsByTagName()的调用</li>
+		<li>获取了元素的childNodes属性</li>
+		<li>获取了元素的attributes属性</li>
+		<li>访问了特殊的集合，如document.forms、document.images等等</li>
+	</ul>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要了解了当使用NodeList对象时，合理使用会极大的提升代码执行速度。</p>
+	<h4>优化循环</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以使用下面几种方式来优化循环</p>
+	<ol>
+		<li>减值迭代</li>
+		<li>简化终止条件</li>
+		<li>简化循环体</li>
+		<li>使用后测试循环</li>
+	</ol>
+	<h4>展开循环</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当循环次数是确定的，消除循环并使用多次函数调用往往会更快。</p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
