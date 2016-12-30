@@ -261,9 +261,9 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>优化循环</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以使用下面几种方式来优化循环</p>
 	<dl>
-		<dt>减值迭代</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.减值迭代</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大多数循环使用一个从0开始、增加到某个特定值的迭代器，在很多情况下，从最大值开始，在循环中不断减值的迭代器更加有效。</p></dd>
-		<dt>简化终止条件</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.简化终止条件</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于每次循环过程都会计算终止条件，所以必须保证它尽可能快，也就是说避免属性查找或者其它的操作，最好是将循环控制量保存到局部变量中，也就是说对数组或列表对象进行遍历时，提前将length保存到局部变量中，避免在循环的每一步重复取值。</p>
 		<pre><code class="javascript">
 		var list = document.getElementsByTagName('p');
@@ -273,9 +273,9 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		for(var i = 0, l = list.length; i < l; i++){ //··· }
 		</code></pre>
 		</dd>
-		<dt>简化循环体</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.简化循环体</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;循环体是执行最多的，所以要确保其被最大限度地优化。</p></dd>
-		<dt>使用后测试循环</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.使用后测试循环</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在JavaScript中，我们可以使用for(;;),while(),for(in)三种循环，事实上，这三种循环中for(in)的效率极差，因为它需要查询散列键，只要可以，就应该尽量少用。for(;;)和while循环，while循环的效率要优于for(;;),可能是因为for(;;)结构的问题，需要经常跳转回去。</p>
         <pre><code class="javascript">
         var arr = [1,2,3,4,5,6,7], sum = 0;
@@ -294,11 +294,26 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<h4>避免双重解释</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要提高代码性能，尽可能避免出现需要按照JavaScript解释的字符串，也就是：</p>
 	<dl>
-		<dt>尽量少使用eval函数</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.尽量少使用eval函数</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用eval相当于在运行时再次调用解释引擎对内容进行运行，需要消耗大量时间，而且使用Eval带来的安全性问题也是不容忽视的。</p></dd>
-		<dt>不要使用Function构造器</dt>
+		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不要使用Function构造器</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要给setTimeout或者setInterval传递字符串参数。<code>var num = 0; setTimeout('num++', 10);</code>//可以替换为：<code>var num = 0; function addNum(){num ++;} setTimeout(addNum,10);</code></p></dd>
 	</dl>
+	<h4>缩短否定检测</h4>
+	<pre><code class="javascript">
+	if(oTest != '#ff0000'){ //do something}
+	if(oTest != null){ //do something}
+    if(oTest != false){ //do something}
+    //虽然这些都正确，但用逻辑非操作符来操作也有同样的效果：
+    if(!oTest){ //do something}
+	</code></pre>
+	<h4>使用常量</h4>
+	<ol>
+		<li><strong>重复值：</strong>任何在多处用到的值都应该抽取为一个常量</li>
+		<li><strong>用户界面字符串：</strong>任何用于显示给用户的字符串，都应该抽取出来以方便国际化</li>
+		<li><strong>URLs：</strong>在Web应用中，资源位置很容易变更，所以推荐用一个公共地方存放所有的URL。</li>
+		<li><strong>任何可能会更改的值：</strong>每当你用到字面量值的时候，你都要问一下自己这个值在未来是不是会变化，如果答案是“是”，那么这个值就应该被提取出来作为一个常量。</li>
+	</ol>
 </article>
 <div class="line"></div>
 <div class="tag-list">
