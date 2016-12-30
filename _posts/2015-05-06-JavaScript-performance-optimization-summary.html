@@ -48,24 +48,24 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于变量未赋值时定义默认值的情况，与其使用if语句判断，不如使用一种更简洁的方式实现：</p>
 	<pre>
 	<code class="javascript">
-	function displayVal(limit){
-	  var length;
-	  if(limit){
-	    length = limit;
-	  }else{
-	    length = 10;
-	  }
-	  for(var i = 0; i++; i <= length){
+    function displayVal(limit){
+      var length;
+      if(limit){
+        length = limit;
+      }else{
+        length = 10;
+      }
+      for(var i = 0; i++; i <= length){
 	    ···
 	  }
-	}
-	//更简洁的方式
-	function displayVal(limit){
-	  var length = limit || 10;
-	  for(var i = 0; i++; i <= length){
+    }
+    //更简洁的方式
+    function displayVal(limit){
+      var length = limit || 10;
+      for(var i = 0; i++; i <= length){
 	    ···
-	  }
-	}
+      }
+    }
 	</code>
 	</pre>
 	<h4>定时器</h4>
@@ -86,7 +86,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
       intervalTimes++;
       if(intervalTimes >= 10){
 	    clearInterval(interv);
-	  }
+      }
     }
     var interv = setInterval(interval,10);
 	</code>
@@ -335,7 +335,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
     }
     if(oTest != null){ 
 	  //do something
-	}
+    }
     if(oTest != false){ 
       //do something
     }
