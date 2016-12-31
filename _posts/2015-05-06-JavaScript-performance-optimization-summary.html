@@ -56,14 +56,14 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
         length = 10;
       }
       for(var i = 0; i++; i <= length){
-	    ···
-	  }
+        ···
+      }
     }
     //更简洁的方式
     function displayVal(limit){
       var length = limit || 10;
       for(var i = 0; i++; i <= length){
-	    ···
+        ···
       }
     }
 	</code>
@@ -74,10 +74,10 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<code class="javascript">
     var timeoutTimes = 0;
     function timeout(){
-	  timeoutTimes++;
-	  if(timeoutTimes < 10){
-	    setTimeout(timeout,10);
-	  }
+      timeoutTimes++;
+      if(timeoutTimes < 10){
+        setTimeout(timeout,10);
+      }
     }	
     timeout();
     //可以转化为
@@ -85,7 +85,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
     function interval(){
       intervalTimes++;
       if(intervalTimes >= 10){
-	    clearInterval(interv);
+        clearInterval(interv);
       }
     }
     var interv = setInterval(interval,10);
@@ -125,7 +125,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	<code class="javascript">
     var buf = [];
     for(var i = 0; i < 100; i ++){
-	  buf.push(i.toString());
+      buf.push(i.toString());
     }
     var all = buf.join("");
     </code>
@@ -334,7 +334,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
       //do something
     }
     if(oTest != null){ 
-	  //do something
+      //do something
     }
     if(oTest != false){ 
       //do something
@@ -351,6 +351,62 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li><strong>URLs：</strong>在Web应用中，资源位置很容易变更，所以推荐用一个公共地方存放所有的URL。</li>
 		<li><strong>任何可能会更改的值：</strong>每当你用到字面量值的时候，你都要问一下自己这个值在未来是不是会变化，如果答案是“是”，那么这个值就应该被提取出来作为一个常量。</li>
 	</ol>
+	<h4>避免与null进行比较</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于JavaScript是弱类型，所以它不会做任何的自动类型检查，所以如果看到与null进行比较的代码，尝试使用以下技术替换：</p>
+	<ol>
+		<li>如果值应为一个引用类型，使用instanceof操作符检查其构造函数</li>
+		<li>如果值应为一个基本类型，使用typeof检查其类型</li>
+		<li>如果是希望对象包含某个特定的方法名，则使用typeof操作符确保指定名字的方法存在于对象上</li>
+	</ol>
+	<h4>避免全局变量</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>全局变量应该全部字母大写，各单词之间用_下划线来连接。</strong>尽可能避免全局变量和函数，尽量减少全局变量的使用，因为在一个页面中包含的所有JavaScript都在同一个域中运行。所以如果你的代码中声明了全局变量或者全局函数的话，后面的代码中载入的脚本文件中的同名变量和函数会覆盖掉(overwirte)的。</p>
+	<pre>
+	<code class="javascript">
+    //糟糕的全局变量和全局函数
+    var current = null;
+    function init(){
+      //...
+    }
+    function change(){
+      //...
+    }
+    function verify(){
+      //...
+    }
+	</code></pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解决的办法有很多，Christian Heilmann建议的方法是：如果变量和函数不需要在“外面”引用，那么就可以使用一个没有名字的方法将他们全都包起来。</p>
+	<pre>
+	<code class="javascript">
+    (function(){
+      var current = null;
+      function init(){
+        //...
+      }
+      function change(){
+        //...
+      }
+      function verify(){
+        //...
+      }
+    })();
+	</code>
+	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果变量和函数需要在“外面”引用，需要把你的变量和函数放在一个“命名空间”中。</p>
+	<pre>
+	<code class="javascript">
+    var myNameSpace = function(){
+      var current = null;
+      function init(){
+        //...
+      }
+      function change(){
+        //...
+      }
+      return {init:init};
+    }
+	</code>
+	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里用一个function做命名空间，在这里声明function更简单，且能保护隐私数据。所有需要在命名空间外调用的函数和属性都要写在return里面return{init:init};</p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
