@@ -420,6 +420,30 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
       </ul>
     </li>
   </ol>
+  <h4>循环引用</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果循环引用中包含DOM对象或者ActiveX对象，那么就会发生内存泄露。内存泄露的后果是在浏览器关闭前，即使是刷新页面，这部分内存不会被浏览器释放。</p>
+  <pre>
+  <code class="javascript">
+  //简单的循环引用
+  var el = document.getElementById('MyElement');
+  var func = function(){
+    //...
+  }
+  el.func p= func;
+  func.element = el;
+  
+  //但是通常不会出现这种情况。通常循环引用发生在为dom元素添加闭包作为expendo的时候。
+
+  function init(){
+    var el = document.getElementById('MyElement');
+    el.onclick = function(){
+      //...
+    }
+  }
+  init();
+  /**init在执行的时候，当前上下文我们叫做context。这个时候，context引用了el, el引用了function,function引用了context。这时候形成了一个循环引用。*/
+  </code>
+  </pre>
 </article>
 <div class="line"></div>
 <div class="tag-list">
