@@ -427,23 +427,209 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
   //简单的循环引用
   var el = document.getElementById('MyElement');
   var func = function(){
-    //...
+    ...
   }
   el.func p= func;
   func.element = el;
-  
+
   //但是通常不会出现这种情况。通常循环引用发生在为dom元素添加闭包作为expendo的时候。
 
   function init(){
     var el = document.getElementById('MyElement');
     el.onclick = function(){
-      //...
+      ...
     }
   }
   init();
   /**init在执行的时候，当前上下文我们叫做context。这个时候，context引用了el, el引用了function,function引用了context。这时候形成了一个循环引用。*/
   </code>
   </pre>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面两种方法可以解决循环引用：</p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>（1）置空DOM对象：</strong></p>
+  <pre>
+  <code class="javascript">
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = function () { //…… } 
+    } 
+    init(); 
+    //可以替换为： 
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = function () { //…… } 
+      el = null; 
+    } 
+    init();
+    //将el置空，context中不包含对dom对象的引用，从而打断循环应用。
+    //如果我们需要将dom对象返回，可以用如下方法：
+
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = function () { //…… } 
+      return el; 
+    } 
+    init(); 
+    //可以替换为： 
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = function () { //…… } 
+      try { return el; } 
+      finally { el = null; } 
+    } 
+    init();
+  </code>
+  </pre>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>（2）构造新的context：</strong></p>
+  <pre>
+  <code class="javascript">
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = function () { //…… } 
+    } 
+    init(); 
+    //可以替换为： 
+    function elClickHandler() { //…… } 
+    function init() { 
+      var el = document.getElementById('MyElement'); 
+      el.onclick = elClickHandler; 
+    } 
+    init();
+    //把function抽到新的context中，这样，function的context就不包含对el的引用，从而打断循环引用。
+  </code>
+  </pre>
+  <h4>通过JS创建的DOM对象，必须append到页面中</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IE下，脚本创建的DOM对象，如果没有append到页面中，刷新页面，这部分内存是不会回收的！</p>
+  <pre>
+  <code class="javascript">
+  function create(){
+    var gc = document.getElementById('GC');
+    for(var i = 0; i < 5000; i++){
+      var el = document.createElement('div');
+      el.innerHTML = "test";
+      gc.appendChild(el);
+      //上面这句可以注释掉，看看浏览器在任务管理器中，点击按钮然后刷新后的内存变化
+    }
+  }
+  </code>
+  </pre>
+  <h4>释放DOM元素占用的内存</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将DOM元素的innerHTML设置为空字符串，可以释放其子元素占用的内存。在rich应用中，用户也许会在一个页面上停留很长时间，可以使用该方法释放积累的越来越多的dom元素使用的内存。</p>
+  <h4>释放javascript对象</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在rich应用中，随着实例化对象数量的增加，内存消耗会越来越大。所以应当及时释放对对象的引用，让GC能够回收这些内存控件。</p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对象： obj = null;</p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对象属性：delete obj.myproperty</p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组item:使用数组的splice方法释放数组中不用的item。</p>
+  <h4>避免string的隐式装箱</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对string的方法调用，比如'xxx.length',浏览器会进行一个隐式的装箱操作，将字符串先转换成一个String对象。推荐对声明有可能使用String实例方法的字符串时，采用如下写法：</p>
+  <p><code>var myString = new String('Hello World');</code></p>
+  <h4>松散耦合</h4>
+  <p><strong>1.解耦HTML/JavaScript</strong></p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JavaScript和HTML的紧密耦合：直接写在HTML中的JS、使用包含内联代码的&gt;script&lt;元素、使用HTML属性来分配事件处理程序等HTML和JavaScript的紧密耦合：JS中包含HTML，然后使用innerHTML来插入一段html文本到页面。其次应该是保持层次的分离，这样可以很容易的确定错误的来源，所以我们应确保HTML呈现应该尽可能与JS保持分离。</p>
+  <p><strong>2.解耦CSS/JavaScript</strong></p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示问题的唯一来源应该是CSS，行为问题的唯一来源应该是JS，层次之间保持松散耦合才可以让你的应用程序更加易于维护，所以像以下的代码：<code>element.style.color="red"尽量改为element.className="edit"</code>，而且不要在css中通过表达式嵌入JS。</p>
+  <p>
+  <strong>3.解耦应用程序/事件处理程序</strong></p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将应用逻辑和事件处理程序相分离：一个事件处理程序应该从事件对象中提取，并将这些信息传送给处理应用逻辑的某个方法中。这样做的好处首先可以让你更容易更改触发特定过程的事件，其次可以在不附加事件的情况下测试代码，使其更易创建单元测试。</p>
+  <h4>性能方面的注意事项</h4>
+  <ol>
+    <li><strong>尽量使用原生方法</strong></li>
+    <li><strong>switch语句相对if较快</strong>，通过将case语句按照最可能到最不可能的顺序进行组织</li>
+    <li><strong>位运算较快</strong>，当进行数字运算时，位运算操作要比任何布尔运算或者算数运算快</li>
+    <li><strong>巧用||和&&布尔运算符</strong>
+  <pre>
+  <code class="javascript">
+    function eventHandler(e){
+      if(!e) e= window.event;
+    }
+    //可以替换为：
+    function eventHandler(e){
+      e = e || window.event;
+    }
+    if(myobj){
+      doSomething(myobj);
+    }
+    //可以替换为：
+    myobj && doSomething(myobj);
+  </code>
+  </pre>
+    </li>
+    <h4>避免错误应注意的地方</h4>
+    <ol>
+      <li><strong>1.每条语句末尾须加分号，</strong>在if语句中，即使条件表达式只有一条语句也要用{}把它括起来，以免后续如果添加了语句之后造成逻辑错误。</li>
+      <li><strong>2.使用+号时需谨慎，</strong>JS和其他编程语言不同的是，在JS中，‘+’除了表示数字值相加，字符串相连接以外，还可以作一元运算符用，把字符串转换为数字。因而如果使用不当，则可能与自增符‘++’混淆而引起计算错误。
+  <pre>
+  <code class="javascript">
+    var valueA = 20;
+    var valueB = "10";
+    alert(valueA + valueB);
+    //output: 2010
+    alert(valueA + (+valueB));
+    //output: 30
+    alert(valueA + +valueB);
+    //output:30
+    alert(valueA ++ valueB);
+    //Compile error;
+  </code>
+  </pre>
+      </li>
+      <li><strong>3.使用return语句需要注意，</strong>一条有返回值的return语句不要用（）括号来括住返回值，如果返回表达式，则表达式应与return关键字在同一行，以避免压缩时，压缩工具自动加分号而造成返回与开发人员不一致的结果。
+  <pre>
+  <code class="javascript">
+  function F1(){
+    var valueA = 1;
+    var valueB = 2;
+    return valueA + valueB;
+  }
+  function F2(){
+    var valueA = 1;
+    var valueB = 2;
+    return valueA + valueB;
+  }
+  alert(F1());
+  //output: 3
+  alert(F2());
+  //output:undefined
+  </code>
+  </pre>
+      </li>
+    </ol>
+  </ol>
+  <h4>==和===的区别</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免在if和while语句的条件部分进行赋值，如if(a==b),但是在比较是否相等的情况下，最好使用全等运算符，也就是使用===和!==操作符会相对于==和!=会好点。==和!=操作符会进行类型强制转换。</p>
+  <pre>
+  <code class="javascript">
+  var valueA = "1";
+  var valueB = 1;
+  if(valueA == valueB){
+    alert("Equal");
+  }else{
+    alert("Not equal");
+  }
+  //output:"Equal"
+  if(valueA === valueB){
+    alert("Equal");
+  }else{
+    alert("Not equal");
+  }
+  //output:"Not equal"
+  </code>
+  </pre>
+  <h4>不要使用生偏语法</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要使用生偏语法，写让人迷惑的代码，虽然计算机能够正确识别并运行，但是晦涩难懂得代码不方便以后维护。</p>
+  <h4>函数返回统一类型</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然JS是弱类型的，对于函数来说，前面返回整数型数据，后面返回布尔值在编译和运行都可以正常通过，但为了规范和以后维护时容易理解，应保证函数应返回统一的数据类型。</p>
+  <h4>总是检查数据类型</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要检查你的方法输入的所有数据，一方面是为了安全性，另一方面也是为了可用性。用户随时随地都会输入错误的数据。这不是因为他们蠢，而是因为他们很忙，并且思考的方式跟你不同。用typeof方法来检测你的function接受的输入是否合法。</p>
+  <h4>何时用单引号，何时用双引号</h4>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然在JavaScript当中，双引号和单引号都可以表示字符串，为了避免混乱，我们建议在HTML中使用双引号，在JS中使用单引号，但为了兼容各个浏览器，也为了解析时不会出错，定义JSON对象时，最好使用双引号。</p>
+  <h4>部署</h4>
+  <ul>
+    <li>用JSLint运行JS验证器来确保没有语法错误或者是代码没有潜在的问题。</li>
+    <li>部署之前推荐使用压缩工具将JS文件压缩。</li>
+    <li>文件编码统一用UTF-8</li>
+    <li>JS程序应该尽量放在.js的文件中，需要调用的时候在HTML中以&gt;script src="filename.js"&lt;的形式包含进来。JS代码若不是该HTML文件所专用的，则应尽量避免在HTML文件中直接编写JS代码。因为这样会大大增加HTML文件的大小，无益于代码的压缩和缓存的使用。另外，&gt;script src="filename.js"&lt;的标签应尽量放在文件的后面，最好是放在&gt;/body&lt;标签前。这样会降低因加载JS代码而影响页面中其他组件的加载时间。</li>
+  </ul>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;永远不要忽略代码优化工作，重构是一项从项目开始到结束需要持续的工作，只有不断地优化代码才能让代码的执行效率越来越好。</p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
