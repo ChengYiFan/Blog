@@ -93,8 +93,10 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</pre>
 	<h4>数字转换成字符串</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一般最好用""+1来将数字转换成字符串，虽然看起来比较丑一点，但事实上这个效率是最高的，从性能上来说：<code>(""+1)&gt;String()&gt;.toString()&gt;new String()</code></p>
+  <p></p>
 	<h4>浮点数转换成整型</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;许多人喜欢使用parseInt(),其实parseInt()是用于将字符串转换成数字，而不是浮点数和整型之间的转换，我们应该使用Math.floor或者Math.round()。</p>
+  <p></p>
 	<h4>各种类型转换</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果定义了toString()方法来进行类型转换的话，推荐显式调用toString(),因为内部的操作在尝试所有的可能性之后，会尝试对象的toString()方法，尝试能否转化为String,所以直接调用这个方法效率会更高。</p>
 	<pre>
@@ -109,6 +111,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</pre>
 	<h4>多个类型声明</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在JavaScript中所有变量都可以使用单个var语句来声明，这样可将声明组合在一起，以减少整个脚本的执行时间，就如上面代码一样，上面代码格式也挺规范，让人一看就明了。</p>
+  <p></p>
 	<h4>字符串连接</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要连接多个字符串，应该少使用+=，如</p>
 	<pre>
@@ -146,6 +149,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</pre>
 	<h4>插入迭代器</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如 <code>var name = values[i]; i++;</code>前面两条语句可以写成<code>var name = values[i++];</code></p>
+  <p></p>
 	<h4>使用直接量</h4>
 	<pre>
 	<code class="javascript">
@@ -248,8 +252,10 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</pre>
 	<h4>删除DOM节点</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>删除dom节点之前，一定要删除注册在该节点上的事件。</strong>不管是用observe方式还是用attachEvent方式注册的事件，否则将会产生无法回收的内存。另外，在removeChild和innerHTML二者之间，尽量选择后者。因为在sIEve（内存泄露监测工具）中监测的结果是用removeChild无法有效地释放dom节点。</p>
+  <p></p>
 	<h4>使用事件代理</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任何可以冒泡的事件都不仅仅可以在事件目标上进行处理，目标的任何祖先节点上也能处理，使用这个知识就可以将事件处理程序附加到更高的地方负责多个目标的事件处理，同样，<strong>对于内容动态增加并且子节点都需要相同的事件处理函数的情况，可以把事件注册到父节点上，这样就不需要为每个子节点注册事件监听了</strong>。另外，现有的js库都采用observe方式来创建事件监听，其实现上隔离了dom对象和事件处理函数之间的循环引用，所以应该尽量采用这种方式来创建事件监听。</p>
+  <p></p>
 	<h4>重复使用的调用结果，事先保存到局部变量</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免多次取值的调用开销，示例如下：</p>
 	<pre>
@@ -278,7 +284,8 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li>访问了特殊的集合，如document.forms、document.images等等</li>
 	</ul>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要了解了当使用NodeList对象时，合理使用会极大的提升代码执行速度。</p>
-	<h4>优化循环</h4>
+	<p></p>
+  <h4>优化循环</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以使用下面几种方式来优化循环</p>
 	<dl>
 		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.减值迭代</dt>
@@ -317,9 +324,11 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最常用的for循环和while循环都是前测试循环，而如do-while这种后测试循环，可以避免最初终止条件的计算，因此运行更快。</p>
 		</dd>
 	</dl>
+  <p></p>
 	<h4>展开循环</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当循环次数是确定的，消除循环并使用多次函数调用往往会更快。</p>
-	<h4>避免双重解释</h4>
+	<p></p>
+  <h4>避免双重解释</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要提高代码性能，尽可能避免出现需要按照JavaScript解释的字符串，也就是：</p>
 	<dl>
 		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.尽量少使用eval函数</dt>
@@ -327,6 +336,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<dt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.不要使用Function构造器</dt>
 		<dd><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要给setTimeout或者setInterval传递字符串参数。<code>var num = 0; setTimeout('num++', 10);</code>//可以替换为：<code>var num = 0; function addNum(){num ++;} setTimeout(addNum,10);</code></p></dd>
 	</dl>
+  <p></p>
 	<h4>缩短否定检测</h4>
 	<pre>
 	<code class="javascript">
@@ -351,6 +361,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li><strong>URLs：</strong>在Web应用中，资源位置很容易变更，所以推荐用一个公共地方存放所有的URL。</li>
 		<li><strong>任何可能会更改的值：</strong>每当你用到字面量值的时候，你都要问一下自己这个值在未来是不是会变化，如果答案是“是”，那么这个值就应该被提取出来作为一个常量。</li>
 	</ol>
+  <p></p>
 	<h4>避免与null进行比较</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于JavaScript是弱类型，所以它不会做任何的自动类型检查，所以如果看到与null进行比较的代码，尝试使用以下技术替换：</p>
 	<ol>
@@ -358,6 +369,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 		<li>如果值应为一个基本类型，使用typeof检查其类型</li>
 		<li>如果是希望对象包含某个特定的方法名，则使用typeof操作符确保指定名字的方法存在于对象上</li>
 	</ol>
+  <p></p>
 	<h4>避免全局变量</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>全局变量应该全部字母大写，各单词之间用_下划线来连接。</strong>尽可能避免全局变量和函数，尽量减少全局变量的使用，因为在一个页面中包含的所有JavaScript都在同一个域中运行。所以如果你的代码中声明了全局变量或者全局函数的话，后面的代码中载入的脚本文件中的同名变量和函数会覆盖掉(overwirte)的。</p>
 	<pre>
@@ -407,6 +419,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
 	</code>
 	</pre>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们这里用一个function做命名空间，在这里声明function更简单，且能保护隐私数据。所有需要在命名空间外调用的函数和属性都要写在return里面return{init:init};</p>
+  <p></p>
   <h4>尊重对象的所有权</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为JavaScript可以在任何时候修改任意对象，这样就可以以不可预计的方式覆写默认的行为，所以如果你不负责维护某个对象，它的对象或者它的方法，那么你就不要对它进行修改，具体一点就是说：</p>
   <ol>
@@ -420,6 +433,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
       </ul>
     </li>
   </ol>
+  <p></p>
   <h4>循环引用</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果循环引用中包含DOM对象或者ActiveX对象，那么就会发生内存泄露。内存泄露的后果是在浏览器关闭前，即使是刷新页面，这部分内存不会被浏览器释放。</p>
   <pre>
@@ -514,14 +528,17 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
   </pre>
   <h4>释放DOM元素占用的内存</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将DOM元素的innerHTML设置为空字符串，可以释放其子元素占用的内存。在rich应用中，用户也许会在一个页面上停留很长时间，可以使用该方法释放积累的越来越多的dom元素使用的内存。</p>
+  <p></p>
   <h4>释放javascript对象</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在rich应用中，随着实例化对象数量的增加，内存消耗会越来越大。所以应当及时释放对对象的引用，让GC能够回收这些内存控件。</p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对象： obj = null;</p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对象属性：delete obj.myproperty</p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数组item:使用数组的splice方法释放数组中不用的item。</p>
+  <p></p>
   <h4>避免string的隐式装箱</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对string的方法调用，比如'xxx.length',浏览器会进行一个隐式的装箱操作，将字符串先转换成一个String对象。推荐对声明有可能使用String实例方法的字符串时，采用如下写法：</p>
   <p><code>var myString = new String('Hello World');</code></p>
+  <p></p>
   <h4>松散耦合</h4>
   <p><strong>1.解耦HTML/JavaScript</strong></p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JavaScript和HTML的紧密耦合：直接写在HTML中的JS、使用包含内联代码的&gt;script&lt;元素、使用HTML属性来分配事件处理程序等HTML和JavaScript的紧密耦合：JS中包含HTML，然后使用innerHTML来插入一段html文本到页面。其次应该是保持层次的分离，这样可以很容易的确定错误的来源，所以我们应确保HTML呈现应该尽可能与JS保持分离。</p>
@@ -530,6 +547,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
   <p>
   <strong>3.解耦应用程序/事件处理程序</strong></p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将应用逻辑和事件处理程序相分离：一个事件处理程序应该从事件对象中提取，并将这些信息传送给处理应用逻辑的某个方法中。这样做的好处首先可以让你更容易更改触发特定过程的事件，其次可以在不附加事件的情况下测试代码，使其更易创建单元测试。</p>
+  <p></p>
   <h4>性能方面的注意事项</h4>
   <ol>
     <li><strong>尽量使用原生方法</strong></li>
@@ -594,6 +612,7 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
       </li>
     </ol>
   </ol>
+  <p></p>
   <h4>==和===的区别</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免在if和while语句的条件部分进行赋值，如if(a==b),但是在比较是否相等的情况下，最好使用全等运算符，也就是使用===和!==操作符会相对于==和!=会好点。==和!=操作符会进行类型强制转换。</p>
   <pre>
@@ -616,12 +635,16 @@ excerpt: JavaScript的性能问题是需要被格外关注的，这就需要我�
   </pre>
   <h4>不要使用生偏语法</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要使用生偏语法，写让人迷惑的代码，虽然计算机能够正确识别并运行，但是晦涩难懂得代码不方便以后维护。</p>
+  <p></p>
   <h4>函数返回统一类型</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然JS是弱类型的，对于函数来说，前面返回整数型数据，后面返回布尔值在编译和运行都可以正常通过，但为了规范和以后维护时容易理解，应保证函数应返回统一的数据类型。</p>
+  <p></p>
   <h4>总是检查数据类型</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要检查你的方法输入的所有数据，一方面是为了安全性，另一方面也是为了可用性。用户随时随地都会输入错误的数据。这不是因为他们蠢，而是因为他们很忙，并且思考的方式跟你不同。用typeof方法来检测你的function接受的输入是否合法。</p>
+  <p></p>
   <h4>何时用单引号，何时用双引号</h4>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虽然在JavaScript当中，双引号和单引号都可以表示字符串，为了避免混乱，我们建议在HTML中使用双引号，在JS中使用单引号，但为了兼容各个浏览器，也为了解析时不会出错，定义JSON对象时，最好使用双引号。</p>
+  <p></p>
   <h4>部署</h4>
   <ul>
     <li>用JSLint运行JS验证器来确保没有语法错误或者是代码没有潜在的问题。</li>
