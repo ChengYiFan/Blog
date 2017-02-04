@@ -47,12 +47,28 @@ excerpt: 随着2012年苹果发布第一款Retina Macbook Pro（以下简称RMBP
       background-image: -moz-image-set(url(pic.png) 1x,url(images/pic@2x.png) 2x);
       background-image: -ms-image-set(url(pic.png) 1x,url(images/pic@2x.png) 2x);
       background-image: -o-image-set(url(pic.png) 1x,url(images/pic@2x.png) 2x);
-	}
+    }
     &lt;/style&gt;
     或者使用HTML代码控制亦可:
     &lt;img src="pic.png" srcset="pic@2x.png 2x" /&gt;
     </code>
     </pre>
+    <h4>三、使用@media控制</h4>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实际是判断屏幕的像素比来取舍是否显示高分辨率图像，代码如下：</p>
+    <pre>
+    <code class="css">
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+      only screen and (min--moz-device-pixel-ratio: 1.5), /* 注意这里的写法比较特殊 */
+      only screen and (-o-min-device-pixel-ratio: 3/2),
+      only screen and (min-device-pixel-ratio: 1.5) {
+        #logo {
+          background-image: url(pic@2x.png);
+          background-size: 100px auto;
+        }
+    }
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用这个的确定就是IE6、7、8不支持@media，所以无效。但是如果你只是支持苹果的RMBP的话，不存在兼容问题，因为MacOS X上压根没有IE！</p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
