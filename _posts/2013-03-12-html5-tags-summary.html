@@ -5,3 +5,26 @@ category: skill
 tags: html
 excerpt: 这是一篇有关HTML5新标签学习汇总的文章，欢迎批评指正。
 ---
+<h3>{{page.title}}</h3>
+<p class="author">
+    作者：<em class="color-pink">Cynthia</em> 
+    <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
+</p>
+<article>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML5中的一些有趣的新特性：</p>
+<ul>
+	<li>用于绘画的canvas元素</li>
+	<li>用于媒介回放的video和audio元素</li>
+	<li>对本地离线存储的更好支持</li>
+	<li>新的特殊内容元素，比如article、footer、header、nav、section</li>
+	<li>新的表单控件，比如calendar、date、time、email、url、search</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面我们来详细看一下：</p>
+<p>&lt;video&gt;定义视频。IE9+和Safari支持MP4，其他主流浏览器支持Ogg和WebM。Chrome三种都支持。</p>
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+	{% endfor%}
+</div>
