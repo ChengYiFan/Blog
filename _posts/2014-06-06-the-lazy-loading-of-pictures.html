@@ -1,6 +1,6 @@
 ---
 layout: default
-title: HTML5新标签学习汇总
+title: 图片的惰性加载
 category: skill
 tags: JavaScript
 excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页面上的东西越来越丰富的时候，我们发现页面的加载速度却越来越慢，而图片的加载量无疑是  
@@ -24,7 +24,7 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     </ul>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，按照第一步将真实的图片地址藏在data-original属性中。这里我假设所有图片都要进行惰性加载，在真实开发环境中，如果是在第一屏的图片，它的src完全可以直接指向真实的地址。</p>
     <pre>
-    <code class="javascript">
+    <code class="html">
     <ul>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/1.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/2.jpg"></li>
@@ -56,6 +56,9 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
                 }else{
                     imageLoaded(obj,obj.getAttribute('data-original'));
                 }
+            }else{
+                //假设图片标签在HTML中的顺序和实际页面中顺序一致
+                break;
             }
         }
     }	
