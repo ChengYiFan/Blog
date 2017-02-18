@@ -45,7 +45,7 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     function init(){
         var imgs = document.images;
         //加载首屏图片
-        for(var i = 0; i<imgs.length; i++){
+        for(var i = 0; i&lt;imgs.length; i++){
             var obj = imgs[i];
             //如果在可视区域并且还没被加载过
             if(obj.getBoundingClientRect().top < document.documentElement.clientHeight && !obj.isLoad){
