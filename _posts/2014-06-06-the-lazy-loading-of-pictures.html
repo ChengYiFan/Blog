@@ -25,8 +25,8 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，按照第一步将真实的图片地址藏在data-original属性中。这里我假设所有图片都要进行惰性加载，在真实开发环境中，如果是在第一屏的图片，它的src完全可以直接指向真实的地址。</p>
     <pre>
     <code class="html">
-    <ul>
-    	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/1.jpg"></li>
+    &lt;ul&gt;
+    	&lt;li class="lazy"&gt;&lt;img src="images/loading.gif" alt="" data-original="images/1.jpg"&gt;&lt;/li&gt;
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/2.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/3.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/4.jpg"></li>
@@ -36,7 +36,7 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/8.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/9.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/10.jpg"></li>
-    </ul>
+    &lt;/ul>&gt;
     </code>
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为我把所有图片都设置为惰性加载模式，而首屏的图片需要直接显示，这里我写了个 init() 函数，注释都在代码中了：</p>
