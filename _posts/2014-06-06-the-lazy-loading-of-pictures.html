@@ -24,7 +24,7 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     </ul>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;首先，按照第一步将真实的图片地址藏在data-original属性中。这里我假设所有图片都要进行惰性加载，在真实开发环境中，如果是在第一屏的图片，它的src完全可以直接指向真实的地址。</p>
     <pre>
-    <code>
+    <code class="javascript">
     <ul>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/1.jpg"></li>
     	<li class="lazy"><img src="images/loading.gif" alt="" data-original="images/2.jpg"></li>
@@ -40,4 +40,25 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     </code>
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为我把所有图片都设置为惰性加载模式，而首屏的图片需要直接显示，这里我写了个 init() 函数，注释都在代码中了：</p>
+    <pre>
+    <code class="javascript">
+    function init(){
+        var imgs = document.images;
+        //加载首屏图片
+        for(var i = 0; i<imgs.length; i++){
+            var obj = imgs[i];
+            //如果在可视区域并且还没被加载过
+            if(obj.getBoundingClientRect().top < document.documentElement.clientHeight && !obj.isLoad){
+                obj.isLoad = true;
+                //先调用HTML5方法
+                if(obj.dataset){
+                    imageLoaded(obj,obj.dataset.original);
+                }else{
+                    imageLoaded(obj,obj.getAttribute('data-original'));
+                }
+            }
+        }
+    }	
+    </code>
+    </pre>
 </article>
