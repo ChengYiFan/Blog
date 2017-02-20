@@ -85,4 +85,15 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     </code>
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;代码中写了个 imageLoaded() 函数来将真实的图片地址指向元素，如果直接将 data-original属性值指向图片的src属性的话，看到的图片可能会一段一段出现，而先将图片完全加载，然后再赋值使图片出现的话，体验就好多了。</p>
+    <pre>
+    <code>
+    function imageLoaded(obj,src){
+        var img = new Image();
+        img.onload = function(){
+            obj.src = src;
+        };
+        img.src = src;
+    }
+    </code>
+    </pre>
 </article>
