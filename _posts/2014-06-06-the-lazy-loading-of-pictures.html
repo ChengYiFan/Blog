@@ -96,4 +96,24 @@ excerpt: 图片的惰性加载是啥意思？为什么要用它？当我们页�
     }
     </code>
     </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OK，接着我们监听scroll事件。当用户滑动页面，图片出现在可视区域时，随即加载图片。</p>
+    <pre>
+    <code>
+    window.onscroll = function(){
+        lazyload();
+    };
+    function lazyload(){
+        var lazy = 0;
+        var images = document.images;
+        for(var i = 0; i < images.length; i++){
+            var obj = images[i];
+            if(obj.getBoundingClientRect().top - lazy < document.documentElement.clientHeight && !obj.isLoad){
+                obj.isLoad = true;
+                if(obj.dataset) imageLoaded(obj, obj.dataset.original);
+                else imageLoaded(obj, obj.getAttribute('data-original'));
+            }
+        }
+    }
+    </code>
+    </pre>
 </article>
