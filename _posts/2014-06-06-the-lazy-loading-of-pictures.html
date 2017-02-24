@@ -118,3 +118,9 @@ excerpt:图片的惰性加载是啥意思？为什么要用它？当我们页面
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有的时候，并不能当图片刚好在可视区域的时候再去加载，而要稍微“预加载”，可以调整下lazyload()函数中的lazy参数。如果“生硬”的显示图片体验不太好，也可以搞点淡出效果，具体就不说了，这样一个简单的图片惰性加载Demo就完成了。</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;惰性加载虽然好处多多，但是也有一个“非致命”的缺点，影响SEO。因为图片都被替换成假的图片，所以会影响图片的收录，所以这功能不建议在详情页使用。</p>
 </article>
+<div class="line"></div>
+<div class="tag-list">
+    {% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+    {% endfor%}
+</div>
