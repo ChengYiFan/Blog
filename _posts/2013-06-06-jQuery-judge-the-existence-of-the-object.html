@@ -5,4 +5,25 @@ category: skill
 tags: jQuery
 excerpt: 如何判断获取的对象是否存在，貌似有很多方法实现，下面以$("#id")举例，为大家详细介绍下具体的判断过程。
 ---
-
+<h3>{{page.title}}</h3>
+<p class="author">
+    作者：<em class="color-pink">Cynthia</em> 
+    <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
+</p>
+<article>
+    <h4>一、判断对象对象是否存在</h4>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果是下面的 jQuery 代码判断一个对象是否存在，是不能用的</p>
+    <pre>
+    <code class="javascript">
+    if($("#id")){ 
+    }else{}
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为 $(“#id”) 不管对象是否存在都会返回 object 。</p>
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+	{% endfor%}
+</div>
