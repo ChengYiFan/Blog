@@ -15,11 +15,17 @@ excerpt: 如何判断获取的对象是否存在，貌似有很多方法实现�
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果是下面的 jQuery 代码判断一个对象是否存在，是不能用的</p>
     <pre>
     <code class="javascript">
-    if($("#id")){ 
-    }else{}
+    if($("#id")){}else{}
     </code>
     </pre>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为 $(“#id”) 不管对象是否存在都会返回 object 。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正确使用判断对象是否存在应该用：</p>
+    <pre>
+    <code class="javascript">
+    if($("#id").length>0){}else{}
+    </code>
+    </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用 jQuery 对象的属性 length 来判断，如果 > 0 就存在。 </p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
