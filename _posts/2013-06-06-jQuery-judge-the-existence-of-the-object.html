@@ -32,6 +32,25 @@ excerpt: 如何判断获取的对象是否存在，貌似有很多方法实现�
     if($("#id")[0]){} else {}
     </code>
     </pre>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;或者直接使用原生的 Javascript 代码来判断：</p>
+    <pre>
+    <code class="javascript">
+    if(document.getElementById("id")){} else {} 
+    </code>
+    </pre>
+    <h4>二、如何判断两个jq对象是同一个对象</h4>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果说要判断是否同一对象，当然是用 === 来判断，但实际上两个不同的 jQuery 对象可能是对同一个/组 DOM 对象的封装，这个时候可以用 is 来判断，比如:</p>
+    <pre>
+    <code class="javascript">
+    var a = $(".editor");
+    var b = $(".editor");
+
+    console.log(a === b);
+    // false
+    console.log(a.is(b));
+    // true
+    </code>
+    </pre>
 </article>
 <div class="line"></div>
 <div class="tag-list">
