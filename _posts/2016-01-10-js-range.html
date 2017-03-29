@@ -10,3 +10,12 @@ excerpt: 为了让开发人员更方便地控制页面，“DOM2级遍历和范�
     作者：<em class="color-pink">Cynthia</em> 
     <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
 </p>
+<article>
+	
+</article>
+<div class="line"></div>
+<div class="tag-list">
+	{% for tag in page.tags %}
+    <a href="{{ site.baseurl}}/show_by_tag/?tag={{tag}}">{{tag}}</a>
+	{% endfor%}
+</div>
