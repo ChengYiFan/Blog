@@ -11,7 +11,18 @@ excerpt: 锚点定位本来是一个比较简单点功能，然而在开发过�
     <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
 </p>
 <article>
-	
+	<h4>一、&lt;a&gt;标签锚点定位</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最简单的方法是锚点用&lt;a&gt;标签，在href属性中写入div的id。</p>
+	<pre>
+	    <code class="html">
+	    	&lt;body&gt;
+               &lt;a href="#div1"&gt;一&lt;/a&gt;
+               &lt;a href="#div2"&gt;二&lt;/a&gt;
+               &lt;div id="div1"&gt;内容一&lt;/div&gt;
+               &lt;div id="div2"&gt;内容二&lt;/div&gt;
+	    	&lt;/body&gt;
+	    </code>
+	</pre>
 </article>
 <div class="line"></div>
 <div class="tag-list">
