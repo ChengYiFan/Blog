@@ -14,15 +14,36 @@ excerpt: 锚点定位本来是一个比较简单点功能，然而在开发过�
 	<h4>一、&lt;a&gt;标签锚点定位</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最简单的方法是锚点用&lt;a&gt;标签，在href属性中写入div的id。</p>
 	<pre>
-	    <code class="html">
-	    	&lt;body&gt;
-               &lt;a href="#div1"&gt;一&lt;/a&gt;
-               &lt;a href="#div2"&gt;二&lt;/a&gt;
-               &lt;div id="div1"&gt;内容一&lt;/div&gt;
-               &lt;div id="div2"&gt;内容二&lt;/div&gt;
-	    	&lt;/body&gt;
-	    </code>
+	<code class="html">
+	&lt;body&gt;
+        &lt;a href="#div1"&gt;一&lt;/a&gt;
+        &lt;a href="#div2"&gt;二&lt;/a&gt;
+        &lt;div id="div1"&gt;内容一&lt;/div&gt;
+        &lt;div id="div2"&gt;内容二&lt;/div&gt;
+	&lt;/body&gt;
+	</code>
 	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种方法的缺点是点击锚点之后，浏览器的URL会发生变化，如果刷新可能会出现问题。</p>
+	<h4>二、window.location.hash="divId"</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二种方式是在js事件中通过window.location.hash="divId"跳转，但地址也会发生变化，感觉跟第一种方法没区别，甚至更麻烦。</p>
+	<h4>三、jQuery的animate属性，当点击锚点后，页面滚动到相应的DIV。接着上面的代码，添加下面的代码。</h4>
+	<pre>
+	<code class="javascript">
+	    $('a').click(function(){
+	        var href = $(this).attr('data-href');
+            $('html,body').animate({
+                scrollTop:$(href).offset().top
+            },{duration: 500,easing: "swing"},function(){});
+	    });
+	</code>
+	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意：运行上面的脚本之前，先将为锚点增加相应的ID，同时去掉a标签的href属性，替换为data-href。$('html,body')可以替换为相应的div，如果不起作用，试着给该div增加overflow:scroll属性。另外脚本可以进一步优化，可以自己来试试。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样做的好处是：URL地址不会变，同时点击锚点时会自动响应scroll事件，不需要重新绑定。缺点是：如果页面复杂的话，偏移值可能会发生变化需要算法辅助。</p>
+	<h4>四、js的srollIntoView方法</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js的srollIntoView方法，让元素滚动到可视区域，兼容性页非常棒。<code>document.getElementById("divId").scrollIntoView();</code></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种方法的好处，是URL不会变，同时能够响应相应的scroll事件，不需要算法什么的。</p>
+	
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推介大家用第四种，我依次试了前三种，都有各种问题。   </p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
