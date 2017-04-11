@@ -11,6 +11,9 @@ excerpt: 锚点定位本来是一个比较简单点功能，然而在开发过�
     <span class="normal-date"> · {{ page.date | date: "%Y年%m月%d日" }}</span>
 </p>
 <article>
+    <h4>锚点定位是什么</h4>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用命名标记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定的位置。</p>
+    <p>创建到命名锚记的链接的过程分为两步。首先，创建命名锚记，然后创建到该命名锚记的链接。</p>
 	<h4>一、&lt;a&gt;标签锚点定位</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最简单的方法是锚点用&lt;a&gt;标签，在href属性中写入div的id。</p>
 	<pre>
@@ -42,8 +45,29 @@ excerpt: 锚点定位本来是一个比较简单点功能，然而在开发过�
 	<h4>四、js的srollIntoView方法</h4>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;js的srollIntoView方法，让元素滚动到可视区域，兼容性页非常棒。<code>document.getElementById("divId").scrollIntoView();</code></p>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种方法的好处，是URL不会变，同时能够响应相应的scroll事件，不需要算法什么的。</p>
-	
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推介大家用第四种，我依次试了前三种，都有各种问题。   </p>
+	<h4>五、:target伪类与锚点的配合</h4>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在CSS2的时代，锚点的应用并不是很广泛，或者说不被看好与关注，很大一部分原因在于没有CSS这个好帮手辅助。CSS3中有个名为:target的伪类选择器。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:target伪类的显隐控制比单复选框要灵活很多，因为其不仅可以通过兄弟选择器控制样式，还可以使用父子选择器，且推荐使用父子选择器可以做更多精确的控制（展开与收起的状态等）。</p>
+	<pre>
+	<code class="css">
+	.weatherYubao{
+	    //display:block;
+	    height:0px;
+	    overflow:hidden;
+	    transition:height .35s;
+	}
+	.weatherYubao:target #weather Yubao2{
+	    height:300px;
+	}
+	</code>
+	</pre>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是，不足也显而易见，触发定位，即页面的scroll滚动会改变，略影响体验。但，这只是JS尚未载入完毕的交互体验增强之法。实际还是要借助JS组织默认行为的。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:target伪类选择器IE9+，以及其他现代浏览器支持。但，这并不影响该技术的使用，因为是纯JS方法上的改进。</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;推荐大家用第四种。   </p>
+
+	<h5>两个小tip:</h5>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F5刷新不会触发锚点定位，在Chrome浏览器下，这个过程由三部曲完成：首先，滚动高度为0；其次，锚点定位高度；最后，还原成刷新之前滚动条的滚动高度。</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;连续按F5，或者说长按F5，则似乎等同于Ctrl+F5,Chrome浏览器以及IE浏览器都是如此。</p>
 </article>
 <div class="line"></div>
 <div class="tag-list">
